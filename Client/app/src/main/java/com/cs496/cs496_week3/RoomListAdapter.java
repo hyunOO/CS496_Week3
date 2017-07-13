@@ -17,8 +17,8 @@ public class RoomListAdapter extends BaseAdapter {
 
     private ArrayList<Room> roomList = new ArrayList<>();
 
-    public RoomListAdapter(){
-
+    public RoomListAdapter(ArrayList<Room> roomList){
+        this.roomList = roomList;
     }
 
     @Override
@@ -37,12 +37,14 @@ public class RoomListAdapter extends BaseAdapter {
         Room room = roomList.get(position);
 
         if(room != null){
-            TextView title = (TextView) convertView.findViewById(R.id.titleContent) ;
-            TextView maker = (TextView) convertView.findViewById(R.id.makerContent) ;
-            TextView currentState = (TextView) convertView.findViewById(R.id.currentState) ;
+            TextView title = (TextView) convertView.findViewById(R.id.title);
+            TextView mealType = (TextView) convertView.findViewById(R.id.mealType);
+            TextView makerId = (TextView) convertView.findViewById(R.id.makerId);
+            TextView current = (TextView) convertView.findViewById(R.id.current);
             title.setText(room.getTitle());
-            maker.setText(room.getMaker());
-            currentState.setText(room.getCurrentState());
+            mealType.setText(room.getMealType());
+            makerId.setText(room.getMakerId());
+            current.setText(room.getCurrent());
         }
         return convertView;
     }

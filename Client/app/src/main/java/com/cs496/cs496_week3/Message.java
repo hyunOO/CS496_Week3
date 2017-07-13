@@ -5,24 +5,51 @@ package com.cs496.cs496_week3;
  */
 
 public class Message {
-    private Room room;
-    private String status;
+    private String title, requester, bangjang, content;
+    private Boolean requesterRead, bangjangRead, result;
 
-    public void Room(Room room, String status){
-        this.room = room;
-        this.status = status;
+    public void Message(String title, String requester, String bangjang, Boolean requesterRead, Boolean bangjangRead, Boolean result) {
+        this.title = title;
+        this.requester = requester;
+        this.bangjang = bangjang;
+        this.requesterRead = requesterRead;
+        this.bangjangRead = bangjangRead;
+        this.result = result;
     }
 
-    public void setRoom(Room room){
-        this.room = room;
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public void setStauts(String status){
-        this.status = status;
+
+    public void setRequester(String requester) {
+        this.requester = requester;
     }
-    public Room getRoom(){
-        return this.room;
+
+    public void setBangjang(String bangjang) {
+        this.bangjang = bangjang;
     }
-    public String getStauts(){
-        return this.status;
+
+    public void setRequesterRead(Boolean requesterRead) {
+        this.requesterRead = requesterRead;
+    }
+
+    public void setBangjangRead(Boolean bangjangRead) {
+        this.bangjangRead = bangjangRead;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getFrom() {
+        return this.bangjang;
+    }
+
+    public String getContent() {
+        return this.content;
     }
 }

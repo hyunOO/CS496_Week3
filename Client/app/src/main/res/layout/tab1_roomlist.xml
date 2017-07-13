@@ -13,19 +13,31 @@
         <Button
             android:id="@+id/fastSearchContent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Department"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/secondSearchContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2nd fast"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/fastSearchAdd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 
     <EditText
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_menu_search"/>
 
     <LinearLayout
         android:id="@+id/showRoom"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 
 public class MessageAdapter extends BaseAdapter{
     private ArrayList<Message> messageList = new ArrayList<>();
+    private String userId = null;
 
-    public MessageAdapter(){
-
+    public MessageAdapter(ArrayList<Message> messageList, String userId){
+        this.messageList = messageList;
+        this.userId = userId;
     }
 
     @Override
@@ -36,14 +39,19 @@ public class MessageAdapter extends BaseAdapter{
         Message message = messageList.get(position);
 
         if(message != null){
-            TextView status = (TextView) convertView.findViewById(R.id.status);
-            TextView title = (TextView) convertView.findViewById(R.id.titleContentMessage) ;
-            TextView maker = (TextView) convertView.findViewById(R.id.makerContentMessage) ;
-            TextView currentState = (TextView) convertView.findViewById(R.id.currentStateMessage) ;
-            status.setText(message.getStauts());
-            title.setText(message.getRoom().getTitle());
-            maker.setText(message.getRoom().getMaker());
-            currentState.setText(message.getRoom().getCurrentState());
+            TextView message_title = (TextView) convertView.findViewById(R.id.message_title);
+            TextView message_from = (TextView) convertView.findViewById(R.id.message_from);
+            TextView message_content = (TextView) convertView.findViewById(R.id.message_content);
+
+            Button accept = (Button) convertView.findViewById(R.id.accept);
+            Button reject = (Button) convertView.findViewById(R.id.reject);
+//            Button confirm = (Button) convertView.findViewById(R.id.confirm);
+
+
+            message_title.setText(message.getTitle());
+            message_from.setText(message.getFrom());;
+//            message_content.setText(message.getContent());
+
         }
         return convertView;
     }

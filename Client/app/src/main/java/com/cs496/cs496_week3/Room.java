@@ -1,34 +1,49 @@
 package com.cs496.cs496_week3;
 
+import java.util.ArrayList;
+
 /**
  * Created by rongrong on 2017-07-14.
  */
 
 public class Room {
-    private String title, maker, currentState;
+    private String title, makerId, current, mealType;
 
-    public void Room(String title, String maker, String currentState){
+    public void Room(String title, String makerId, String mealType) {
         this.title = title;
-        this.maker = maker;
-        this.currentState = currentState;
+        this.makerId = makerId;
+        this.mealType = mealType;
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         this.title = title;
     }
-    public void setMaker(String maker){
-        this.maker = maker;
+
+    public void setMakerId(String makerId) {
+        this.makerId = makerId;
     }
-    public void setCurrentState(String currentState){
-        this.currentState = currentState;
+
+    public void setMealType(String mealType) {
+        this.mealType = mealType;
     }
-    public String getTitle(){
+
+    public void setCurrent(Integer maxUser, Integer currentUser) {
+        this.current = String.valueOf(currentUser) + "/" + String.valueOf(maxUser);
+    }
+
+    public String getTitle() {
         return this.title;
     }
-    public String getMaker(){
-        return this.maker;
+
+    public String getMakerId() {
+        return this.makerId;
     }
-    public String getCurrentState(){
-        return this.currentState;
+
+    public String getMealType() {
+        return this.mealType;
+    }
+
+    public String getCurrent() {
+        return current;
     }
 }
