@@ -1,0 +1,81 @@
+package com.cs496.cs496_week3;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+/**
+ * Created by q on 2017-07-13.
+ */
+
+public class RoomListViewAdapter extends BaseAdapter {
+    private ArrayList<Room> roomList = new ArrayList<>();
+
+    String title, maker, currentState;
+
+    public RoomListViewAdapter(String title, String maker, String currentState){
+        this.title = title;
+        this.maker = maker;
+        this.currentState = currentState;
+    }
+
+    @Override
+    public int getCount(){
+        return roomList.size();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent){
+        final Context context = parent.getContext();
+
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.roomlist_layout, parent, false);
+        }
+        Room room = roomList.get(position);
+
+        if(room != null){
+            TextView title = (TextView) convertView.findViewById(R.id.titleContent) ;
+            TextView maker = (TextView) convertView.findViewById(R.id.makerContent) ;
+            TextView currentState = (TextView) convertView.findViewById(R.id.currentState) ;
+            title.setText(room.getTitle());
+            maker.setText(room.getMaker());
+            currentState.setText(room.getCurrentState());
+        }
+        return convertView;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position ;
+    }
+
+    @Override
+    public Room getItem(int position) {
+        return roomList.get(position) ;
+    }
+
+    public void add(Room room){
+        roomList.add(room);
+        notifyDataSetChanged();
+    }
+
+    public void remove(Room room){
+        roomList.remove(room);
+        notifyDataSetChanged();
+    }
+
+    public void remove(int index){
+        roomList.remove(index);
+        notifyDataSetChanged();
+    }
+
+
+}
