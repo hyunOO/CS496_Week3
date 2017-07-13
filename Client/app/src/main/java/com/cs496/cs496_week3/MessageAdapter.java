@@ -2,7 +2,6 @@ package com.cs496.cs496_week3;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,13 +10,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by q on 2017-07-14.
+ * Created by rongrong on 2017-07-14.
  */
 
-public class MessageListViewAdapter extends BaseAdapter {
+public class MessageAdapter extends BaseAdapter{
     private ArrayList<Message> messageList = new ArrayList<>();
 
-    public MessageListViewAdapter(){
+    public MessageAdapter(){
 
     }
 
@@ -32,7 +31,7 @@ public class MessageListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.messagelist_layout, parent, false);
+            convertView = inflater.inflate(R.layout.tab0_message_layout, parent, false);
         }
         Message message = messageList.get(position);
 

@@ -5,20 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
- * Created by q on 2017-07-13.
+ * Created by rongrong on 2017-07-14.
  */
 
-public class RoomListViewAdapter extends BaseAdapter {
+public class RoomListAdapter extends BaseAdapter {
+
     private ArrayList<Room> roomList = new ArrayList<>();
 
-    public RoomListViewAdapter(){
+    public RoomListAdapter(){
 
     }
 
@@ -33,7 +32,7 @@ public class RoomListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.roomlist_layout, parent, false);
+            convertView = inflater.inflate(R.layout.tab0_roomlist_layout, parent, false);
         }
         Room room = roomList.get(position);
 
@@ -72,6 +71,4 @@ public class RoomListViewAdapter extends BaseAdapter {
         roomList.remove(index);
         notifyDataSetChanged();
     }
-
-
 }
