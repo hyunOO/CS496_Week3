@@ -18,12 +18,8 @@ import java.util.ArrayList;
 public class RoomListViewAdapter extends BaseAdapter {
     private ArrayList<Room> roomList = new ArrayList<>();
 
-    String title, maker, currentState;
+    public RoomListViewAdapter(){
 
-    public RoomListViewAdapter(String title, String maker, String currentState){
-        this.title = title;
-        this.maker = maker;
-        this.currentState = currentState;
     }
 
     @Override

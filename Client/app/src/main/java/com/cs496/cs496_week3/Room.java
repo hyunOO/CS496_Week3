@@ -7,6 +7,12 @@ package com.cs496.cs496_week3;
 public class Room {
     private String title, maker, currentState;
 
+    public void Room(String title, String maker, String currentState){
+        this.title = title;
+        this.maker = maker;
+        this.currentState = currentState;
+    }
+
     public void setTitle(String title){
         this.title = title;
     }

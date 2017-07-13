@@ -11,9 +11,6 @@ import android.view.ViewGroup;
  */
 
 public class FragmentA extends Fragment {
-    public FragmentA(){
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
