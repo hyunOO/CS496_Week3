@@ -16,7 +16,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -153,13 +152,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
                 if (tab1 instanceof Tab1RoomList) {
                     tab1 = new RoomInfo(listener);
-                    Log.e("change", "Tab1RoomList -> RoomInfo");
                 } else { // Instance of NextFragment
                     tab1 = new Tab1RoomList(listener);
-                    Log.e("change", "RoomInfo -> Tab1RoomList");
                 }
                 notifyDataSetChanged();
-                Log.e("success", "Successfully Changed Fragment");
             }
         }
 

@@ -15,10 +15,10 @@ public class RoomInfo extends Fragment {
     View view;
     static FirstPageFragmentListener firstPageListener;
 
-    public RoomInfo(){
+    public RoomInfo() {
     }
 
-    public RoomInfo(FirstPageFragmentListener listener){
+    public RoomInfo(FirstPageFragmentListener listener) {
         firstPageListener = listener;
     }
 
