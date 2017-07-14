@@ -7,12 +7,13 @@ import java.util.ArrayList;
  */
 
 public class Room {
-    private String title, makerId, current, mealType;
+    private String title, makerId, current, mealType, roomId;
 
-    public void Room(String title, String makerId, String mealType) {
+    public void Room(String title, String makerId, String mealType, String roomId) {
         this.title = title;
         this.makerId = makerId;
         this.mealType = mealType;
+        this.roomId = roomId;
     }
 
     public void setTitle(String title) {
@@ -45,5 +46,9 @@ public class Room {
 
     public String getCurrent() {
         return current;
+    }
+
+    public String getRoomId() {
+        return this.roomId;
     }
 }

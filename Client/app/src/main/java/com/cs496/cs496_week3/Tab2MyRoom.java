@@ -24,17 +24,17 @@ public class Tab2MyRoom extends Fragment{
         room1.setMakerId("rongrong");
         room1.setMealType("상관없음");
         room1.setCurrent(4, 3);
-        roomList.add(room1);
-        roomList.add(room1);
-        roomList.add(room1);
-        roomList.add(room1);
-        roomList.add(room1);
-        roomList.add(room1);
 
 
         ListView listview = (ListView) view.findViewById(R.id.roomlistListView);
-        RoomListAdapter adapter = new RoomListAdapter(roomList);
+        RoomListAdapter adapter = new RoomListAdapter();
         listview.setAdapter(adapter);
+
+        adapter.add(room1);
+        adapter.add(room1);
+        adapter.add(room1);
+        adapter.add(room1);
+        adapter.add(room1);
 
 
         return view;

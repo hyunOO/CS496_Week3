@@ -19,8 +19,8 @@ public class RoomListAdapter extends BaseAdapter {
 
     private ArrayList<Room> roomList = new ArrayList<>();
 
-    public RoomListAdapter(ArrayList<Room> roomList){
-        this.roomList = roomList;
+    public RoomListAdapter(){
+
     }
 
     @Override
@@ -73,7 +73,7 @@ public class RoomListAdapter extends BaseAdapter {
     }
 
     public void add(Room room){
-        roomList.add(room);
+        roomList.add(0, room);
         notifyDataSetChanged();
     }
 
