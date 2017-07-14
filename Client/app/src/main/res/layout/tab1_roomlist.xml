@@ -11,17 +11,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/fastSearchContent"
+            android:id="@+id/firstFastSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Department"
             android:textAllCaps="false"/>
 
         <Button
-            android:id="@+id/secondSearchContent"
+            android:id="@+id/secondFastSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2nd fast"
+            android:text="mealType"
             android:textAllCaps="false"/>
 
         <Button
