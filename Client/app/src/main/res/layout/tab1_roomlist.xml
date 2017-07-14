@@ -37,7 +37,7 @@
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/ic_menu_search"/>
+        android:drawableLeft="@android:drawable/ic_menu_search" />
 
     <LinearLayout
         android:id="@+id/showRoom"

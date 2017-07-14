@@ -31,7 +31,7 @@ public class Tab3Message extends Fragment {
         messageList.add(message1);
         messageList.add(message1);
         messageList.add(message1);
-        
+
         ListView listview = (ListView) view.findViewById(R.id.messageListView);
         MessageAdapter adapter = new MessageAdapter(messageList, "rongrong");
         listview.setAdapter(adapter);

@@ -1,5 +1,7 @@
 package com.cs496.cs496_week3;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public static SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -74,11 +77,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+
+        if (mViewPager.getCurrentItem() == 0) {
+            if (mSectionsPagerAdapter.getItem(0) instanceof RoomInfo) {
+                ((RoomInfo) mSectionsPagerAdapter.getItem(0)).backPressed();
+            } else if (mSectionsPagerAdapter.getItem(0) instanceof Tab1RoomList) {
+                finish();
+            }
         } else {
-            super.onBackPressed();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -135,8 +147,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+        }
+
+        private final class FirstPageListener implements FirstPageFragmentListener {
+            public void onSwitchToNextFragment() {
+                mFragmentManager.beginTransaction().remove(tab1)
+                        .commit();
+                if (tab1 instanceof Tab1RoomList) {
+                    tab1 = new RoomInfo(listener);
+                    Log.e("change", "Tab1RoomList -> RoomInfo");
+                } else { // Instance of NextFragment
+                    tab1 = new Tab1RoomList(listener);
+                    Log.e("change", "RoomInfo -> Tab1RoomList");
+                }
+                mFragmentManager.beginTransaction().show(tab1);
+                mFragmentManager.beginTransaction().commit();
+                notifyDataSetChanged();
+                Log.e("success", "Successfully Changed Fragment");
+            }
+        }
+
+        private final FragmentManager mFragmentManager;
+        public Fragment tab1;
+        private Context context;
+        FirstPageListener listener = new FirstPageListener();
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            mFragmentManager = fm;
         }
 
         @Override
@@ -144,7 +185,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //Returning the current tabs
             switch (position) {
                 case 0:
-                    Tab1RoomList tab1 = new Tab1RoomList();
+                    if (tab1 == null) {
+                        tab1 = new Tab1RoomList(listener);
+                    }
                     return tab1;
                 case 1:
                     Tab2MyRoom tab2 = new Tab2MyRoom();
@@ -175,6 +218,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             return null;
         }
+
+//        @Override
+//        public int getItemPosition(Object object) {
+//            if (object instanceof Tab1RoomList && tab1 instanceof RoomInfo) {
+//                return POSITION_NONE;
+//            }
+//            if (object instanceof RoomInfo && tab1 instanceof Tab1RoomList) {
+//                return POSITION_NONE;
+//            }
+//            return POSITION_UNCHANGED;
+//        }
     }
+//
+//    public interface FirstPageFragmentListener {
+//        void onSwitchToNextFragment();
+//    }
 
 }

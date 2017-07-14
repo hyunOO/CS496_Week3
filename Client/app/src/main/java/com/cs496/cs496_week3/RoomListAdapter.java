@@ -1,10 +1,12 @@
 package com.cs496.cs496_week3;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class RoomListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
         final Context context = parent.getContext();
 
         if (convertView == null) {
@@ -45,6 +47,17 @@ public class RoomListAdapter extends BaseAdapter {
             mealType.setText(room.getMealType());
             makerId.setText(room.getMakerId());
             current.setText(room.getCurrent());
+//
+//            LinearLayout roomlist_layout = (LinearLayout) convertView.findViewById(R.id.roomlist_layout);
+//            roomlist_layout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Log.e("listview click", "clicked "+position+"th item in listview");
+//                }
+//            });
+
+
+
         }
         return convertView;
     }
