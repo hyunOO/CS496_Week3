@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 public class Room {
     private String title, makerId, current, mealType, roomId;
+    Boolean closed;
 
-    public void Room(String title, String makerId, String mealType, String roomId) {
+    public void Room(String title, String makerId, String mealType, String roomId, Boolean closed) {
         this.title = title;
         this.makerId = makerId;
         this.mealType = mealType;
         this.roomId = roomId;
+        this.closed = closed;
     }
 
     public void setTitle(String title) {
@@ -30,6 +32,9 @@ public class Room {
 
     public void setCurrent(Integer maxUser, Integer currentUser) {
         this.current = String.valueOf(currentUser) + "/" + String.valueOf(maxUser);
+    }
+    public void setClosed(Boolean closed){
+        this.closed = closed;
     }
 
     public String getTitle() {
@@ -50,5 +55,9 @@ public class Room {
 
     public String getRoomId() {
         return this.roomId;
+    }
+
+    public Boolean getClosed(){
+        return closed;
     }
 }

@@ -26,9 +26,9 @@
 
         <Button
             android:id="@+id/fastSearchAdd"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="+"
             android:textAllCaps="false"/>
 
     </LinearLayout>

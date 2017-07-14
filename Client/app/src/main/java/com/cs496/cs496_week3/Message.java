@@ -6,15 +6,15 @@ package com.cs496.cs496_week3;
 
 public class Message {
     private String title, requester, bangjang, content;
-    private Boolean requesterRead, bangjangRead, result;
+    private Boolean requesterRead, bangjangRead, accept;
 
-    public void Message(String title, String requester, String bangjang, Boolean requesterRead, Boolean bangjangRead, Boolean result) {
+    public void Message(String title, String requester, String bangjang, Boolean requesterRead, Boolean bangjangRead, Boolean accept) {
         this.title = title;
         this.requester = requester;
         this.bangjang = bangjang;
         this.requesterRead = requesterRead;
         this.bangjangRead = bangjangRead;
-        this.result = result;
+        this.accept = accept;
     }
 
     public void setTitle(String title) {
@@ -37,8 +37,8 @@ public class Message {
         this.bangjangRead = bangjangRead;
     }
 
-    public void setResult(Boolean result) {
-        this.result = result;
+    public void setAccept(Boolean accept) {
+        this.accept = accept;
     }
 
     public String getTitle() {
