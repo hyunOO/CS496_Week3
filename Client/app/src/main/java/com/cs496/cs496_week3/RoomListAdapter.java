@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by rongrong on 2017-07-14.
@@ -16,14 +17,14 @@ import java.util.ArrayList;
 public class RoomListAdapter extends BaseAdapter {
 
     private ArrayList<Room> roomList = new ArrayList<>();
+    private ArrayList<Room> displayList = new ArrayList<>();
 
     public RoomListAdapter() {
-
     }
 
     @Override
     public int getCount() {
-        return roomList.size();
+        return displayList.size();
     }
 
     @Override
@@ -34,7 +35,7 @@ public class RoomListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.tab0_roomlist_layout, parent, false);
         }
-        Room room = roomList.get(position);
+        Room room = displayList.get(position);
 
         if (room != null) {
             TextView title = (TextView) convertView.findViewById(R.id.title);
@@ -58,11 +59,12 @@ public class RoomListAdapter extends BaseAdapter {
 
     @Override
     public Room getItem(int position) {
-        return roomList.get(position);
+        return displayList.get(position);
     }
 
     public void add(Room room) {
         roomList.add(0, room);
+        displayList.add(0, room);
         notifyDataSetChanged();
     }
 
@@ -78,6 +80,25 @@ public class RoomListAdapter extends BaseAdapter {
 
     public void clearAdapter() {
         roomList.clear();
+        displayList.clear();
         notifyDataSetChanged();
     }
+
+    public void filter(String search_text) {
+        search_text = search_text.toLowerCase(Locale.getDefault());
+        displayList.clear();
+        if (search_text.length() == 0) {
+            displayList.addAll(roomList);
+        }else{
+            for (Room room : roomList){
+                if (room.getTitle().contains(search_text)
+                        || (room.getMealType().contains(search_text))
+                        || (room.getMakerId().contains(search_text))){
+                    displayList.add(room);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }
