@@ -17,7 +17,16 @@
             android:layout_height="wrap_content"
             android:hint="아이디" />
 
+        <Button
+            android:id="@+id/duplicate"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#40e0d0"
+            android:text="중복 확인" />
+
+
         <EditText
+            android:id="@+id/pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호" />
@@ -31,6 +40,7 @@
 
 
         <EditText
+            android:id="@+id/circleselect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="동아리"
@@ -38,6 +48,7 @@
             android:scrollbars="vertical"/>
 
         <EditText
+            android:id="@+id/hobbyselect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="취미 혹은 하고 싶은 말"
@@ -45,6 +56,7 @@
             android:scrollbars="vertical"/>
 
         <Button
+            android:id="@+id/press"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="#40e0d0"
@@ -53,5 +65,14 @@
     </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/hiden"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/hiden2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

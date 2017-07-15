@@ -39,9 +39,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login_layout);
         final Context mContext = this;
 
-        LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.main_sign_layout);
-        linearLayout1.setVisibility(View.GONE);
-
         Button login_btn = (Button) findViewById(R.id.login);
         login_btn.setOnClickListener((new View.OnClickListener(){
             @Override
@@ -70,6 +67,7 @@ public class Login extends AppCompatActivity {
                         intent.putExtra("hobby", hobby);
                         intent.putExtra("tag", tag);
                         startActivity(intent);
+                        finish();
                     }
                 }
                 catch (Exception e){
@@ -81,15 +79,17 @@ public class Login extends AppCompatActivity {
         sign_btn.setOnClickListener((new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 Intent intent = new Intent(Login.this, Sign.class);
                 startActivity(intent);
+                finish();
+
                 /*
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_login_layout);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) linearLayout.getLayoutParams();
                 params.topMargin = 50;
                 params.bottomMargin = 0;
                 linearLayout.setLayoutParams(params);
-                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_login_layout);
                 linearLayout.setVisibility(View.GONE);
                 LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.main_sign_layout);
                 linearLayout1.setVisibility(View.VISIBLE);
@@ -97,6 +97,7 @@ public class Login extends AppCompatActivity {
                 ArrayAdapter sAdapter = ArrayAdapter.createFromResource(mContext, R.array.department, R.layout.support_simple_spinner_dropdown_item);
                 spinner.setAdapter(sAdapter);
                 */
+
             }
         }));
     }
