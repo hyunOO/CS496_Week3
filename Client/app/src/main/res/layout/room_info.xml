@@ -6,43 +6,115 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="80dp">
-
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="전산과 모여라~~"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="제목: "
+            android:textAlignment="center" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="목록"/>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="가입요청" />
-
-            <Button
-                android:id="@+id/btnReturn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="돌아가기" />
-
-        </LinearLayout>
+            android:id="@+id/roominfo_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
+            android:text="전산과 모여라~" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="유형: "
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/roominfo_mealType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="상관없음" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="방장: "
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/roominfo_makerId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="rongrong" />
+
+        <TextView
+            android:id="@+id/roominfo_current"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="3/4"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:text="참여자 목록" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/showUserList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/userlistListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="가입요청" />
+
+        <Button
+            android:id="@+id/btnReturn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="목록보기" />
+
+    </LinearLayout>
 
 </LinearLayout>

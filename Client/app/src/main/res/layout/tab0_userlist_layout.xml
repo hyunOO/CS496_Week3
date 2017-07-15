@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:descendantFocusability="blocksDescendants">
+    android:paddingLeft="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -16,49 +15,39 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="제목: "
-            android:textAlignment="center"/>
+            android:paddingRight="5dp"
+            android:text="id:" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/userId"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3.86"
             android:gravity="center_vertical"
-            android:text="전산과 모여라~" />
+            android:text="rongrong" />
 
         <TextView
-            android:id="@+id/current"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center_vertical"
-            android:text="3/4"
-            android:textAlignment="center" />
+            android:paddingRight="5dp"
+            android:text="Dep.:"
+            android:textAlignment="textEnd" />
 
+        <TextView
+            android:id="@+id/userDepartment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5.14"
+            android:gravity="center_vertical"
+            android:text="SoC" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="30dp"
         android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="유형: "
-            android:textAlignment="center"/>
-
-        <TextView
-            android:id="@+id/mealType"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="상관없음" />
 
         <TextView
             android:id="@+id/textView2"
@@ -66,24 +55,33 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="방장: "
-            android:textAlignment="center" />
+            android:paddingRight="5dp"
+            android:text="circle:" />
 
         <TextView
-            android:id="@+id/makerId"
+            android:id="@+id/userCircle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="Kaldi" />
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="rongrong"/>
+            android:paddingRight="5dp"
+            android:text="hobby:"
+            android:textAlignment="textEnd" />
 
-
+        <TextView
+            android:id="@+id/userHobby"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="Coffe" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/roomId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
 
 </LinearLayout>
