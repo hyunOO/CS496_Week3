@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ import okhttp3.Response;
 
 public class Tab1RoomList extends Fragment {
     RoomListAdapter adapter = new RoomListAdapter();
-    View view;
+    View view, view2;
     static FirstPageFragmentListener firstPageListener;
 
     public Tab1RoomList() {
@@ -37,10 +38,10 @@ public class Tab1RoomList extends Fragment {
         firstPageListener = listener;
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab1_roomlist, null);
 
-        ListView listview = (ListView) view.findViewById(R.id.roomlistListView);
+        final ListView listview = (ListView) view.findViewById(R.id.roomlistListView);
         listview.setAdapter(adapter);
 
         LoadRoomList();
@@ -49,7 +50,26 @@ public class Tab1RoomList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.e("listview click", "clicked " + i + "th item in listview");
+
+                TextView clicked_title = (TextView) view.findViewById(R.id.title);
+                TextView clicked_mealType = (TextView) view.findViewById(R.id.mealType);
+                TextView clicked_makerId = (TextView) view.findViewById(R.id.makerId);
+                TextView clicked_current = (TextView) view.findViewById(R.id.current);
+                TextView clicked_roomId = (TextView) view.findViewById(R.id.roomId);
+                RoomInfo.roomId = clicked_roomId.getText().toString();
+
                 firstPageListener.onSwitchToNextFragment();
+
+                TextView roominfo_title = (TextView) RoomInfo.view.findViewById(R.id.roominfo_title);
+                TextView roominfo_mealType = (TextView) RoomInfo.view.findViewById(R.id.roominfo_mealType);
+                TextView roominfo_makerId = (TextView) RoomInfo.view.findViewById(R.id.roominfo_makerId);
+                TextView roominfo_current = (TextView) RoomInfo.view.findViewById(R.id.roominfo_current);
+
+                roominfo_title.setText(clicked_title.getText().toString());
+                roominfo_mealType.setText(clicked_mealType.getText().toString());
+                roominfo_makerId.setText(clicked_makerId.getText().toString());
+                roominfo_current.setText(clicked_current.getText().toString());
+
             }
         });
 
@@ -116,6 +136,11 @@ public class Tab1RoomList extends Fragment {
             }
             try {
                 newroom.setCurrent(room.getInt("maxUser"), room.getInt("currentUser"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                newroom.setRoomId(room.getString("_id"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

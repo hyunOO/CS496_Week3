@@ -41,10 +41,12 @@ public class RoomListAdapter extends BaseAdapter {
             TextView mealType = (TextView) convertView.findViewById(R.id.mealType);
             TextView makerId = (TextView) convertView.findViewById(R.id.makerId);
             TextView current = (TextView) convertView.findViewById(R.id.current);
+            TextView roomId = (TextView) convertView.findViewById(R.id.roomId);
             title.setText(room.getTitle());
             mealType.setText(room.getMealType());
             makerId.setText(room.getMakerId());
             current.setText(room.getCurrent());
+            roomId.setText(room.getRoomId());
         }
         return convertView;
     }

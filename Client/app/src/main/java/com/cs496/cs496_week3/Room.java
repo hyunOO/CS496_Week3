@@ -33,6 +33,11 @@ public class Room {
     public void setCurrent(Integer maxUser, Integer currentUser) {
         this.current = String.valueOf(currentUser) + "/" + String.valueOf(maxUser);
     }
+
+    public  void  setRoomId(String roomId){
+        this.roomId = roomId;
+    }
+
     public void setClosed(Boolean closed){
         this.closed = closed;
     }
