@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="80dp"
     android:orientation="vertical"
     android:descendantFocusability="blocksDescendants">
 
@@ -25,7 +25,16 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center_vertical"
-            android:text="전산과 모여라~"/>
+            android:text="전산과 모여라~" />
+
+        <TextView
+            android:id="@+id/current"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="3/4"
+            android:textAlignment="center" />
 
 
         <!--<HorizontalScrollView-->
@@ -59,15 +68,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="상관없음"/>
+            android:text="상관없음" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="방장: "
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/makerId"
@@ -77,14 +87,6 @@
             android:gravity="center_vertical"
             android:text="rongrong"/>
 
-        <TextView
-            android:id="@+id/current"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="3/4"
-            android:textAlignment="center"/>
 
     </LinearLayout>
 
