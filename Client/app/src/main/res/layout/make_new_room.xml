@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="방 제목" />
+
+    <EditText
+        android:id="@+id/makeNewRoomTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="방 제목을 입력하세요" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="방 유형" />
+
+    <Spinner
+        android:id="@+id/makeNewRoomMealType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/mealType" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="최대 인원" />
+
+    <EditText
+        android:id="@+id/makeNewRoomMaxUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="최대 인원을 입력하세요"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/makeNewRoomConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="방 만들기"/>
+
+    <Button
+        android:id="@+id/makeNewRoomCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="취소"/>
+
+</LinearLayout>

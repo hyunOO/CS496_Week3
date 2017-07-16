@@ -2,8 +2,11 @@ package com.cs496.cs496_week3;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
@@ -18,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +39,7 @@ import okhttp3.Response;
  */
 
 public class Tab1RoomList extends Fragment {
-    RoomListAdapter adapter = new RoomListAdapter();
+    static RoomListAdapter adapter = new RoomListAdapter();
     View view, view2;
     static FirstPageFragmentListener firstPageListener;
     EditText searchRoom;
@@ -134,7 +138,22 @@ public class Tab1RoomList extends Fragment {
             }
         });
 
+        FloatingActionButton makeNewRoom = (FloatingActionButton) view.findViewById(R.id.makeNewRoom);
+        makeNewRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MakeNewRoom.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LoadRoomList();
     }
 
     @Override

@@ -1,57 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/fastSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/departmentSearch"
+        <LinearLayout
+            android:id="@+id/fastSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/departmentSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학과로 검색"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/mealTypeSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유형으로 검색"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/fastSearchAdd"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/searchRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawableRight="@android:drawable/ic_delete"
+            android:maxLines="1" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/showRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="학과로 검색"
-            android:textAllCaps="false" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/mealTypeSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="유형으로 검색"
-            android:textAllCaps="false" />
+            <ListView
+                android:id="@+id/roomlistListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/fastSearchAdd"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:textAllCaps="false" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/searchRoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        android:drawableRight="@android:drawable/ic_delete"
-        android:maxLines="1" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/makeNewRoom"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="42dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:tint="@android:color/white"
+        android:scaleType="center"/>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/showRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/roomlistListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-</LinearLayout>
+</RelativeLayout>

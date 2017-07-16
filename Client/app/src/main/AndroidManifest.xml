@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Sign"/>
+        <activity android:name=".MakeNewRoom" />
     </application>
 
 </manifest>
