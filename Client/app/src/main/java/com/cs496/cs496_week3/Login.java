@@ -5,20 +5,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -33,6 +25,7 @@ import okhttp3.Response;
 
 public class Login extends AppCompatActivity {
     public static String id = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,20 +33,19 @@ public class Login extends AppCompatActivity {
         final Context mContext = this;
 
         Button login_btn = (Button) findViewById(R.id.login);
-        login_btn.setOnClickListener((new View.OnClickListener(){
+        login_btn.setOnClickListener((new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 EditText txt1 = (EditText) findViewById(R.id.enterId);
                 String str = txt1.getText().toString();
-                HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/user/id/"+str).newBuilder();
+                HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/user/id/" + str).newBuilder();
                 String url = urlBuilder.build().toString();
                 GetHandler handler = new GetHandler();
-                try{
+                try {
                     String res = handler.execute(url).get();
-                    if(res == null){
+                    if (res == null) {
                         Toast.makeText(mContext, "존재하지 않는 아이디 입니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
+                    } else {
                         JSONObject json = new JSONObject(res);
                         id = json.getString("id");
                         String department = json.getString("department");
@@ -69,20 +61,18 @@ public class Login extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                 }
             }
         }));
 
         Button sign_btn = (Button) findViewById(R.id.sign);
-        sign_btn.setOnClickListener((new View.OnClickListener(){
+        sign_btn.setOnClickListener((new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 Intent intent = new Intent(Login.this, Sign.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent, 4885);
 
                 /*
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_login_layout);
@@ -104,8 +94,10 @@ public class Login extends AppCompatActivity {
 
     public class GetHandler extends AsyncTask<String, Void, String> {
         OkHttpClient client = new OkHttpClient();
+
         public GetHandler() {
         }
+
         @Override
         protected String doInBackground(String... params) {
             Request request = new Request.Builder()
@@ -119,6 +111,16 @@ public class Login extends AppCompatActivity {
             } catch (Exception e) {
             }
             return null;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 4885) {
+            if (resultCode == RESULT_OK) {
+                finish();
+            }
         }
     }
 }
