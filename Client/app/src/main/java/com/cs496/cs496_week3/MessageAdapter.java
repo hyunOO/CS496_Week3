@@ -108,6 +108,8 @@ public class MessageAdapter extends BaseAdapter{
                         try{
                             res = handler.execute(url).get();
                             Log.d("Hello", "Hi");
+                            btn_accept.setVisibility(View.GONE);
+                            btn_reject.setVisibility(View.GONE);
                         }
                         catch(Exception e){
 
@@ -384,7 +386,7 @@ public class MessageAdapter extends BaseAdapter{
     }
 
     public void add(Message message){
-        messageList.add(0, message);
+        messageList.add(message);
         notifyDataSetChanged();
     }
 
@@ -395,6 +397,11 @@ public class MessageAdapter extends BaseAdapter{
 
     public void remove(int index){
         messageList.remove(index);
+        notifyDataSetChanged();
+    }
+
+    public void clearAll(){
+        messageList.clear();
         notifyDataSetChanged();
     }
 }

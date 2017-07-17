@@ -3,8 +3,10 @@ package com.cs496.cs496_week3;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MotionEventCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -35,6 +36,7 @@ import okhttp3.Response;
  */
 
 public class Tab3Message extends Fragment {
+    final MessageAdapter adapter = new MessageAdapter();
     View view;
     Runnable mTimerTask;
     Handler mHandler;
@@ -42,7 +44,6 @@ public class Tab3Message extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab3_message, null);
         ListView listview = (ListView) view.findViewById(R.id.messageListView);
-        final MessageAdapter adapter = new MessageAdapter();
         listview.setAdapter(adapter);
 
         /*
@@ -54,11 +55,35 @@ public class Tab3Message extends Fragment {
         };
         timer.schedule(timerTask, 0, 10);
         */
-        LoadMessage(adapter);
+        LoadMessage();
+
         return view;
     }
 
-    public void LoadMessage(MessageAdapter adapter){
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final SwipeRefreshLayout swipeView = (SwipeRefreshLayout) getView().findViewById(R.id.showMessage);
+        swipeView.setColorSchemeColors(getResources().getColor(android.R.color.holo_blue_dark), getResources().getColor(android.R.color.holo_blue_light), getResources().getColor(android.R.color.holo_green_dark));
+        swipeView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeView.setRefreshing(true);
+
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadMessage();
+                        swipeView.setRefreshing(false);
+                    }
+                }, 1000);
+            }
+        });
+    }
+
+    public void LoadMessage(){
+
+        adapter.clearAll();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/message/bangjang/" + Login.id).newBuilder();
         String url = urlBuilder.build().toString();
