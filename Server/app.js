@@ -7,7 +7,7 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 
 // [CONFIGURE APP TO USE bodyParser]
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 	
 // [CONFIGURE SERVER PORT]

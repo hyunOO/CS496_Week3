@@ -14,7 +14,7 @@ module.exports = function(app, Models)
 		console.log("request to /api");
 		res.render("list.html");
 		console.log("   successfully rendered list.html");
-	})
+	});
 
 	// 현재 모든 user의 정보를 리턴한다.
 	app.get('/user', function(req, res){
@@ -47,7 +47,7 @@ module.exports = function(app, Models)
 		})
 	});
 
-	// 해당 title에 맞는 room을 리턴한다.
+	// 해당 title에 맞는 room들을 리턴한다.
 	app.get('/room/title/:title', function(req, res){
 		console.log("request to /room/title/"+req.params.title);
 		Models.Room.find({title: req.params.title}, function(err, rooms){
@@ -94,6 +94,28 @@ module.exports = function(app, Models)
 		})
 	});
 
+	app.get('/room/roomId/:roomId', function(req, res){
+		console.log("request to /room/roomId"+req.params.roomId);
+		Models.Room.findById(req.params.roomId, function(err, room){
+			if(err) return res.status(500).json({error: 'database failure'});
+			if(!room) return res.status(404).json({error: 'room not found'});
+			res.json(room);
+		});
+	});
+
+	// return userlist of a specific room
+	app.get('/room/:roomId/userlist', function(req, res){
+		console.log("request to /room/"+req.params.roomId+"/userlist")
+		Models.Room.findOne({_id: req.params.roomId}, function(err, room){
+			if (err) return res.status(500).json({error: err});
+			if (!room) return res.status(404).json({error: "no such room exists"});
+			Models.User.find({id: {$in: room.userList}}, function(err, users){
+				if (err) return res.status(500).json({error: err});
+				res.json(users);
+			})
+		})
+	})
+
 	// 현재 모든 message의 정보를 리턴한다.
 	app.get('/message', function(req, res){
 		console.log("request to /message");
@@ -106,7 +128,7 @@ module.exports = function(app, Models)
 
 	app.get('/message/bangjang/:bangjang', function(req, res){
 		console.log("request to /message/bangjang/"+req.params.bangjang);
-		Models.Message.find({bangjang: req.body.bangjang, hideB: false}, function(err, messages){
+		Models.Message.find({bangjang: req.params.bangjang, hideB: false}, function(err, messages){
 			if(err) return res.status(500).json({error: err});
 			res.json(messages);
 			console.log("   successfully responsed");
@@ -115,9 +137,23 @@ module.exports = function(app, Models)
 
 	app.get('/message/requester/:requester', function(req, res){
 		console.log("request to /message/requester/"+req.params.requester);
-		Models.Message.find({requester: req.body.requester, hideR: false}, function(err, messages){
+		Models.Message.find({requester: req.params.requester, hideR: false}, function(err, messages){
 			if(err) return res.status(500).send({error: err});
 			res.json(messages);
+			console.log("   successfully responsed");
+		})
+	});
+
+	app.get('/message/specific/:roomId/:requester/:bangjangRead', function(req, res){
+		console.log("request to /message/specific/"+req.params.roomId+"/"+req.params.requester+"/"+req.params.bangjangRead);
+		Models.Message.findOne({roomId: req.params.roomId, requester: req.params.requester, 
+			bangjangRead: req.params.bangjangRead}, function(err, message){
+			if(err) return res.status(500).send({error: err});
+			if(!message) {
+				console.log("   message not found");
+				return res.status(404).send({error: "message not found"});
+			}
+			res.json(message);
 			console.log("   successfully responsed");
 		})
 	});
@@ -149,7 +185,7 @@ module.exports = function(app, Models)
 		var room = new Models.Room();
 		room.title = req.body.title;
 		room.makerId = req.body.makerId;
-		room.state = false;
+		room.closed = false;
 		room.mealType = req.body.mealType;
 		room.maxUser = req.body.maxUser;
 		room.currentUser = 1;
@@ -173,11 +209,10 @@ module.exports = function(app, Models)
 		message.roomId = req.body.roomId;
 		message.requester = req.body.requester;
 		message.bangjang = req.body.bangjang;
-		message.requesterRead = req.body.requesterRead;
 		message.bangjangRead = req.body.bangjangRead;
-		message.state = req.body.state;
-		message.hideR = false;
+		message.accept = req.body.accept;
 		message.hideB = false;
+		message.hideR = false;
 		message.save(function(err){
 			if(err){
 				console.error(err);
@@ -189,16 +224,17 @@ module.exports = function(app, Models)
 		});			
 	});
 
-	app.put('/user/:userId', function(req, res){
+	app.post('/user/:userId', function(req, res){
+		console.log(req.body.department);
 		console.log("request to /user/"+req.params.userId);
-		Models.User.findById(req.params.userId, function(err, user){
+		Models.User.findOne({id: req.params.userId}, function(err, user){
 			if(err) return res.status(500).json({error: 'database failure'});
 			if(!user) return res.status(404).json({error: 'user not found'});
 			if(req.body.id) user.id = req.body.id;
 			if(req.body.department) user.department = req.body.department;
+			if(req.body.circle) user.circle = req.body.circle;
 			if(req.body.hobby) user.hobby = req.body.hobby;
-			if(req.body.tag) user.tag.push(req.body.tag);
-			room.save(function(err){
+			user.save(function(err){
 				if(err) res.status(500).json({error: 'failed to update'});
 				res.json({message: 'user updated'});
 				console.log("   successfully responsed");
@@ -222,7 +258,7 @@ module.exports = function(app, Models)
 		});
 	});
 
-	app.put('/room/addUser/:roomId', function(req, res){
+	app.post('/room/addUser/:roomId', function(req, res){
 		console.log("request to /room/addUser/"+req.params.roomId);
 		Models.Room.findById(req.params.roomId, function(err, room){
 			if(err) return res.status(500).json({error: 'database failure'});
@@ -230,7 +266,7 @@ module.exports = function(app, Models)
 			var userList = room.userList;
 			userList.push(req.body.userId);
 			room.currentUser += 1;
-			if(room.currentUser == room.maxUser) room.state = true;
+			if(room.currentUser == room.maxUser) room.closed = true;
 			room.save(function(err){
 				if(err) res.status(500).json({error: 'failed to update'});
 				res.json({message: 'room updated'});
@@ -239,14 +275,14 @@ module.exports = function(app, Models)
 		});
 	});
 
-	app.put('/message/:roomId/:requester', function(req, res){
+	app.post('/message/:roomId/:requester', function(req, res){
 		console.log("request to /message/"+req.params.roomId+"/"+req.params.requester);
 		Models.Message.findOne({roomId: req.params.roomId, requester:req.params.requester}, function(err, message){
 			if(err) return res.status(500).json({error: 'database failure'});
 			if(!message) return res.status(404).json({error: 'message not found'});
 			if(req.body.requesterRead) message.requesterRead = req.body.requesterRead;
 			if(req.body.bangjangRead) message.bangjangRead = req.body.bangjangRead;
-			if(req.body.state) message.state = req.body.state;
+			if(req.body.accept) message.accept = req.body.accept;
 			if(req.body.hideR) message.hideR = req.body.hideR;
 			if(req.body.hideB) message.hideB = req.body.hideB;
 			message.save(function(err){

@@ -12,22 +12,22 @@ var userSchema = new Schema({
 var roomSchema = new Schema({
 	title: String,
 	makerId: String, 
-	state: Boolean, 
+	closed: Boolean, 
 	mealType: String,
 	maxUser: Number,
 	currentUser: Number,
-	userList: Array,
+	userList: Array
 }, {versionKey: false})
 
 var messageSchema = new Schema({
+	//roomId, requester, bangjangRead are primary key
 	roomId: String,
-	requester: String, // to from 보다 
-	bangjang: String, // request bangjang 이 직관적이여서 바꿨어!
-	requesterRead: Boolean,
+	requester: String,
+	bangjang: String,
 	bangjangRead: Boolean,
-	state: Boolean,
-	hideR: Boolean,
-	hideB: Boolean
+	accept: Boolean,
+	hideB: Boolean,
+	hideR: Boolean
 }, {versionKey: false})
 
 module.exports = {
