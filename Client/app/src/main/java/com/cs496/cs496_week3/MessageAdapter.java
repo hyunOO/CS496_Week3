@@ -59,14 +59,16 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
                 }
                 TextView txt = convertView.findViewById(R.id.message_from);
                 txt.setText(message.getRequester());
-                Button btn_accept = convertView.findViewById(R.id.accept);
+                final Button btn_accept = convertView.findViewById(R.id.accept);
+                final Button btn_reject = convertView.findViewById(R.id.reject);
+
                 btn_accept.setOnClickListener((new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -82,6 +84,8 @@ public class MessageAdapter extends BaseAdapter{
                             String add_res = null;
                             try{
                                 add_res = addUserHanler.execute(url_hello).get();
+                                btn_accept.setVisibility(View.GONE);
+                                btn_reject.setVisibility(View.GONE);
                             }
                             catch (Exception e){
 
@@ -94,7 +98,6 @@ public class MessageAdapter extends BaseAdapter{
                     }
                 }));
 
-                Button btn_reject = convertView.findViewById(R.id.reject);
                 btn_reject.setOnClickListener((new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -126,7 +129,7 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
@@ -148,7 +151,7 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
@@ -170,7 +173,7 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
@@ -192,7 +195,7 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
@@ -214,7 +217,7 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
@@ -236,7 +239,7 @@ public class MessageAdapter extends BaseAdapter{
                     JSONObject room_res = new JSONObject(res_room);
                     String title = room_res.getString("title");
                     TextView txt = convertView.findViewById(R.id.message_title);
-                    txt.setText(title);
+                    txt.setText("방제: "+title);
                 }
                 catch (Exception e){
 
