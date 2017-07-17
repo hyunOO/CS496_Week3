@@ -99,6 +99,11 @@ public class RoomInfo extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        try {
+                            bodyContent.put("accept", false);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         PostNewMessageThread post_thread = new PostNewMessageThread(bodyContent);
                         post_thread.start();
