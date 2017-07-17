@@ -40,7 +40,7 @@ import okhttp3.Response;
 
 public class Tab1RoomList extends Fragment {
     static RoomListAdapter adapter = new RoomListAdapter();
-    View view, view2;
+    View view;
     static FirstPageFragmentListener firstPageListener;
     EditText searchRoom;
 
