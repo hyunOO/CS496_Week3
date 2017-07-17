@@ -1,7 +1,9 @@
 package com.cs496.cs496_week3;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,14 +17,33 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    String department, circle, hobby;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -44,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-        String department = intent.getStringExtra("department");
-        String circle = intent.getStringExtra("circle");
-        String hobby = intent.getStringExtra("hobby");
+        department = intent.getStringExtra("department");
+        circle = intent.getStringExtra("circle");
+        hobby = intent.getStringExtra("hobby");
         String tag = intent.getStringExtra("tag");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,6 +92,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu menu = navigationView.getMenu();
+        MenuItem id_show = menu.findItem(R.id.id_show);
+        id_show.setTitle("아이디: " + Login.id);
+        MenuItem department_show = menu.findItem(R.id.department_show);
+        department_show.setTitle("학과: " + department);
+        MenuItem circle_show = menu.findItem(R.id.circle_show);
+        circle_show.setTitle("동아리: " + circle);
+        MenuItem hobby_show = menu.findItem(R.id.hobby_show);
+        hobby_show.setTitle("취미: " + hobby);
+
     }
 
     @Override
@@ -98,18 +130,107 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.edit) {
+            final View dialogView = getLayoutInflater().inflate(R.layout.sign_modify, null);
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+            alert.setTitle("개인정보 수정");
+            alert.setView(dialogView);
 
-        } else if (id == R.id.nav_slideshow) {
+            final EditText txt1 = dialogView.findViewById(R.id.id_modify);
+            txt1.setText(Login.id);
+            final EditText txt2 = dialogView.findViewById(R.id.pw_modify);
+            final EditText txt3 = dialogView.findViewById(R.id.circle_modify);
+            txt3.setText(circle);
+            final EditText txt4 = dialogView.findViewById(R.id.hobbyselect_modify);
+            txt4.setText(hobby);
+            final TextView hiden3 = dialogView.findViewById(R.id.hiden3);
+            hiden3.setVisibility(View.GONE);
 
-        } else if (id == R.id.nav_manage) {
+            final Spinner spinner = dialogView.findViewById(R.id.departmentselect_modify);
+            final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.department, R.layout.support_simple_spinner_dropdown_item);
+            spinner.setAdapter(sAdapter);
+            String[] arr = getResources().getStringArray(R.array.department);
+            for(int i = 0; i < arr.length; i++){
+                if(arr[i].equals(department)){
+                    spinner.setSelection(i);
+                }
+            }
 
-        } else if (id == R.id.nav_share) {
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    hiden3.setText(""+parent.getItemAtPosition(position));
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+            });
 
-        } else if (id == R.id.nav_send) {
 
+            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    final TextView txt_hiden4 = (TextView) dialogView.findViewById(R.id.hiden4);
+                    txt_hiden4.setText("false");
+
+                    HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/user/"+Login.id).newBuilder();
+                    String url_new = urlBuilder.build().toString();
+                    String id_modify = txt1.getText().toString();
+                    String pw_modify = txt2.getText().toString();
+                    String department_modify = hiden3.getText().toString();
+                    String circle_modify = txt3.getText().toString();
+                    String hobby_modify = txt4.getText().toString();
+
+                    if(!id_modify.equals(Login.id)){
+                        HttpUrl.Builder urlBuilder_toget = HttpUrl.parse("http://13.124.143.15:10001/user/id/"+id_modify).newBuilder();
+                        String url = urlBuilder.build().toString();
+                        GetHandler handler = new GetHandler();
+                        String result = null;
+                        try{
+                            result = handler.execute(url).get();
+                            if(result.contains("not found") && !id_modify.equals("")){
+                                Toast.makeText(MainActivity.this, "사용할 수 있는 아이디입니다.", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this, "바꾸시려는 아이디는 이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show();
+                                txt_hiden4.setText("true");
+                            }
+                        }
+                        catch (Exception e){
+
+                        }
+                    }
+
+                    if(txt_hiden4.getText().toString().equals("false")){
+                        Login.id = id_modify;
+                        department = department_modify;
+                        circle = circle_modify;
+                        hobby = hobby_modify;
+                        PutHandler handler = new PutHandler(id_modify, pw_modify, department_modify, circle_modify, hobby_modify);
+                        String result = null;
+                        try{
+                            result = handler.execute(url_new).toString();
+                        }
+                        catch (Exception e){
+
+                        }
+                    }
+                }
+            });
+
+            alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+            alert.show();
+
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -121,6 +242,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
+    public class GetHandler extends AsyncTask<String, Void, String> {
+        OkHttpClient client = new OkHttpClient();
+        public GetHandler() {
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            Request request = new Request.Builder()
+                    .url(params[0])
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful())
+                    throw new IOException("Unexpected code " + response.toString());
+                return response.body().string();
+            } catch (Exception e) {
+            }
+            return null;
+        }
+    }
+
+    public class PutHandler extends AsyncTask<String, Void, String> {
+        OkHttpClient client = new OkHttpClient();
+        String id, pw, department, circle, hobby;
+        public PutHandler(String id, String pw, String department, String circle, String hobby) {
+            this.id = id;
+            this.pw = pw;
+            this.department = department;
+            this.circle = circle;
+            this.hobby = hobby;
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            RequestBody formBody = new FormBody.Builder()
+                    .add("id", id)
+                    .add("pw", pw)
+                    .add("department", department)
+                    .add("circle", circle)
+                    .add("hobby", hobby)
+                    .build();
+            Request request = new Request.Builder()
+                    .url(params[0]).post(formBody)
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful())
+                    throw new IOException("Unexpected code " + response.toString());
+                return response.body().string();
+            } catch (Exception e) {}
+            return null;
+        }
+    }
+
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         private final class FirstPageListener implements FirstPageFragmentListener {
