@@ -62,14 +62,13 @@ public class Tab1RoomList extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("listview click", "clicked " + i + "th item in listview");
-
                 TextView clicked_title = (TextView) view.findViewById(R.id.title);
                 TextView clicked_mealType = (TextView) view.findViewById(R.id.mealType);
                 TextView clicked_makerId = (TextView) view.findViewById(R.id.makerId);
                 TextView clicked_current = (TextView) view.findViewById(R.id.current);
                 TextView clicked_roomId = (TextView) view.findViewById(R.id.roomId);
                 RoomInfo.roomId = clicked_roomId.getText().toString();
+                RoomInfo.makerId = clicked_makerId.getText().toString();
 
                 firstPageListener.onSwitchToNextFragment();
 

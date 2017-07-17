@@ -78,4 +78,13 @@ public class UserListAdapter extends BaseAdapter {
         userList.clear();
         notifyDataSetChanged();
     }
+
+    public Boolean checkUser(String userId){
+        for (int i=0; i< userList.size(); i++){
+            if (userId.equals(userList.get(i).getId())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
