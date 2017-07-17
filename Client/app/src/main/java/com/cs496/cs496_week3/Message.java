@@ -5,14 +5,18 @@ package com.cs496.cs496_week3;
  */
 
 public class Message {
-    private String title, requester, bangjang, content;
-    private Boolean requesterRead, bangjangRead, accept;
+    private String title, requester, bangjang, roomId;
+    private boolean bangjangRead, accept;
 
-    public void Message(String title, String requester, String bangjang, Boolean requesterRead, Boolean bangjangRead, Boolean accept) {
+    public void Message(){
+
+    }
+
+    public Message(String roomId, String title, String requester, String bangjang, boolean bangjangRead, boolean accept) {
+        this.roomId = roomId;
         this.title = title;
         this.requester = requester;
         this.bangjang = bangjang;
-        this.requesterRead = requesterRead;
         this.bangjangRead = bangjangRead;
         this.accept = accept;
     }
@@ -29,10 +33,6 @@ public class Message {
         this.bangjang = bangjang;
     }
 
-    public void setRequesterRead(Boolean requesterRead) {
-        this.requesterRead = requesterRead;
-    }
-
     public void setBangjangRead(Boolean bangjangRead) {
         this.bangjangRead = bangjangRead;
     }
@@ -45,11 +45,23 @@ public class Message {
         return this.title;
     }
 
-    public String getFrom() {
+    public String getRequester(){
+        return this.requester;
+    }
+
+    public String getBangjang() {
         return this.bangjang;
     }
 
-    public String getContent() {
-        return this.content;
+    public String getRoomId() {
+        return this.roomId;
+    }
+
+    public boolean getBanjangRead(){
+        return this.bangjangRead;
+    }
+
+    public boolean getAccept(){
+        return this.accept;
     }
 }

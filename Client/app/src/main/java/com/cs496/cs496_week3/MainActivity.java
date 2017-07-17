@@ -33,6 +33,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 import okhttp3.FormBody;
@@ -136,9 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             alert.setTitle("개인정보 수정");
             alert.setView(dialogView);
 
-            final EditText txt1 = dialogView.findViewById(R.id.id_modify);
+            final TextView txt1 = dialogView.findViewById(R.id.id_modify);
             txt1.setText(Login.id);
-            final EditText txt2 = dialogView.findViewById(R.id.pw_modify);
             final EditText txt3 = dialogView.findViewById(R.id.circle_modify);
             txt3.setText(circle);
             final EditText txt4 = dialogView.findViewById(R.id.hobbyselect_modify);
@@ -175,45 +176,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/user/"+Login.id).newBuilder();
                     String url_new = urlBuilder.build().toString();
-                    String id_modify = txt1.getText().toString();
-                    String pw_modify = txt2.getText().toString();
                     String department_modify = hiden3.getText().toString();
                     String circle_modify = txt3.getText().toString();
                     String hobby_modify = txt4.getText().toString();
 
-                    if(!id_modify.equals(Login.id)){
-                        HttpUrl.Builder urlBuilder_toget = HttpUrl.parse("http://13.124.143.15:10001/user/id/"+id_modify).newBuilder();
-                        String url = urlBuilder.build().toString();
-                        GetHandler handler = new GetHandler();
-                        String result = null;
-                        try{
-                            result = handler.execute(url).get();
-                            if(result.contains("not found") && !id_modify.equals("")){
-                                Toast.makeText(MainActivity.this, "사용할 수 있는 아이디입니다.", Toast.LENGTH_LONG).show();
-                            }
-                            else{
-                                Toast.makeText(MainActivity.this, "바꾸시려는 아이디는 이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show();
-                                txt_hiden4.setText("true");
-                            }
-                        }
-                        catch (Exception e){
-
-                        }
+                    department = department_modify;
+                    circle = circle_modify;
+                    hobby = hobby_modify;
+                    PutHandler handler = new PutHandler(Login.id, "1", department_modify, circle_modify, hobby_modify);
+                    String result = null;
+                    try{
+                        result = handler.execute(url_new).toString();
+                        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                        Menu menu = navigationView.getMenu();
+                        MenuItem id_show = menu.findItem(R.id.id_show);
+                        id_show.setTitle("아이디: " + Login.id);
+                        MenuItem department_show = menu.findItem(R.id.department_show);
+                        department_show.setTitle("학과: " + department);
+                        MenuItem circle_show = menu.findItem(R.id.circle_show);
+                        circle_show.setTitle("동아리: " + circle);
+                        MenuItem hobby_show = menu.findItem(R.id.hobby_show);
+                        hobby_show.setTitle("취미: " + hobby);
                     }
+                    catch (Exception e){
 
-                    if(txt_hiden4.getText().toString().equals("false")){
-                        Login.id = id_modify;
-                        department = department_modify;
-                        circle = circle_modify;
-                        hobby = hobby_modify;
-                        PutHandler handler = new PutHandler(id_modify, pw_modify, department_modify, circle_modify, hobby_modify);
-                        String result = null;
-                        try{
-                            result = handler.execute(url_new).toString();
-                        }
-                        catch (Exception e){
-
-                        }
                     }
                 }
             });
@@ -276,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected String doInBackground(String... params) {
             RequestBody formBody = new FormBody.Builder()
-                    .add("id", id)
                     .add("pw", pw)
                     .add("department", department)
                     .add("circle", circle)
