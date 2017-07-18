@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,8 +71,9 @@ public class MessageAdapter extends BaseAdapter{
                 }
                 TextView txt = convertView.findViewById(R.id.message_from);
                 txt.setText(message.getRequester());
-                final Button btn_accept = convertView.findViewById(R.id.accept);
-                final Button btn_reject = convertView.findViewById(R.id.reject);
+
+                final ImageButton btn_accept = convertView.findViewById(R.id.accept);
+                final ImageButton btn_reject = convertView.findViewById(R.id.reject);
 
                 btn_accept.setOnClickListener((new View.OnClickListener() {
                     @Override
@@ -88,8 +90,8 @@ public class MessageAdapter extends BaseAdapter{
                             String add_res = null;
                             try{
                                 add_res = addUserHanler.execute(url_hello).get();
-                                btn_accept.setVisibility(View.GONE);
                                 btn_reject.setVisibility(View.GONE);
+                                btn_accept.setVisibility(View.GONE);
                             }
                             catch (Exception e){
 
@@ -112,8 +114,8 @@ public class MessageAdapter extends BaseAdapter{
                         try{
                             res = handler.execute(url).get();
                             Log.d("Hello", "Hi");
-                            btn_accept.setVisibility(View.GONE);
                             btn_reject.setVisibility(View.GONE);
+                            btn_accept.setVisibility(View.GONE);
                         }
                         catch(Exception e){
 

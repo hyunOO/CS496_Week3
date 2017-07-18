@@ -49,15 +49,18 @@
 
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/accept"
         android:layout_width="24dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/ic_thumb_up_black_24dp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/reject"
         android:layout_width="24dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_thumb_down_black_24dp" />
 
