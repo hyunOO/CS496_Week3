@@ -1,4 +1,5 @@
 package com.cs496.cs496_week3;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,8 +33,15 @@ import okhttp3.Response;
 public class Tab2MyRoom extends Fragment{
     static RoomListAdapter adapter = new RoomListAdapter();
     View view;
+    static SecondPageFragmentListener secondPageListener;
     EditText searchMyRoom;
 
+    public Tab2MyRoom() {
+    }
+
+    public Tab2MyRoom(SecondPageFragmentListener listener) {
+        secondPageListener = listener;
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab2_myroom, null);
@@ -40,6 +50,32 @@ public class Tab2MyRoom extends Fragment{
         listview.setAdapter(adapter);
 
         LoadMyRoomList();
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView clicked_title = (TextView) view.findViewById(R.id.title);
+                TextView clicked_mealType = (TextView) view.findViewById(R.id.mealType);
+                TextView clicked_makerId = (TextView) view.findViewById(R.id.makerId);
+                TextView clicked_current = (TextView) view.findViewById(R.id.current);
+                TextView clicked_roomId = (TextView) view.findViewById(R.id.roomId);
+                RoomInfo2.roomId = clicked_roomId.getText().toString();
+                RoomInfo2.makerId = clicked_makerId.getText().toString();
+
+                secondPageListener.onSwitchToNextFragment();
+
+                TextView roominfo_title = (TextView) RoomInfo2.view.findViewById(R.id.roominfo_title);
+                TextView roominfo_mealType = (TextView) RoomInfo2.view.findViewById(R.id.roominfo_mealType);
+                TextView roominfo_makerId = (TextView) RoomInfo2.view.findViewById(R.id.roominfo_makerId);
+                TextView roominfo_current = (TextView) RoomInfo2.view.findViewById(R.id.roominfo_current);
+
+                roominfo_title.setText(clicked_title.getText().toString());
+                roominfo_mealType.setText(clicked_mealType.getText().toString());
+                roominfo_makerId.setText(clicked_makerId.getText().toString());
+                roominfo_current.setText(clicked_current.getText().toString());
+
+            }
+        });
 
         searchMyRoom = (EditText) view.findViewById(R.id.searchMyRoom);
 

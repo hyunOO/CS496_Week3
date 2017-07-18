@@ -116,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else if (mSectionsPagerAdapter.getItem(0) instanceof Tab1RoomList) {
                 finish();
             }
+        } else if (mViewPager.getCurrentItem() == 1) {
+            if (mSectionsPagerAdapter.getItem(1) instanceof RoomInfo2) {
+                ((RoomInfo2) mSectionsPagerAdapter.getItem(1)).backPressed();
+            } else if (mSectionsPagerAdapter.getItem(1) instanceof Tab2MyRoom) {
+                finish();
+            }
         } else {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -151,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.department, R.layout.support_simple_spinner_dropdown_item);
             spinner.setAdapter(sAdapter);
             String[] arr = getResources().getStringArray(R.array.department);
-            for(int i = 0; i < arr.length; i++){
-                if(arr[i].equals(department)){
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i].equals(department)) {
                     spinner.setSelection(i);
                 }
             }
@@ -160,10 +166,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    hiden3.setText(""+parent.getItemAtPosition(position));
+                    hiden3.setText("" + parent.getItemAtPosition(position));
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) {}
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
             });
 
 
@@ -174,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     final TextView txt_hiden4 = (TextView) dialogView.findViewById(R.id.hiden4);
                     txt_hiden4.setText("false");
 
-                    HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/user/"+Login.id).newBuilder();
+                    HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/user/" + Login.id).newBuilder();
                     String url_new = urlBuilder.build().toString();
                     String department_modify = hiden3.getText().toString();
                     String circle_modify = txt3.getText().toString();
@@ -185,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     hobby = hobby_modify;
                     PutHandler handler = new PutHandler(Login.id, "1", department_modify, circle_modify, hobby_modify);
                     String result = null;
-                    try{
+                    try {
                         result = handler.execute(url_new).toString();
                         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                         Menu menu = navigationView.getMenu();
@@ -197,8 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         circle_show.setTitle("동아리: " + circle);
                         MenuItem hobby_show = menu.findItem(R.id.hobby_show);
                         hobby_show.setTitle("취미: " + hobby);
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                 }
@@ -231,8 +238,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public class GetHandler extends AsyncTask<String, Void, String> {
         OkHttpClient client = new OkHttpClient();
+
         public GetHandler() {
         }
+
         @Override
         protected String doInBackground(String... params) {
             Request request = new Request.Builder()
@@ -252,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public class PutHandler extends AsyncTask<String, Void, String> {
         OkHttpClient client = new OkHttpClient();
         String id, pw, department, circle, hobby;
+
         public PutHandler(String id, String pw, String department, String circle, String hobby) {
             this.id = id;
             this.pw = pw;
@@ -259,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             this.circle = circle;
             this.hobby = hobby;
         }
+
         @Override
         protected String doInBackground(String... params) {
             RequestBody formBody = new FormBody.Builder()
@@ -275,7 +286,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!response.isSuccessful())
                     throw new IOException("Unexpected code " + response.toString());
                 return response.body().string();
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
             return null;
         }
     }
@@ -287,9 +299,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mFragmentManager.beginTransaction().remove(tab1)
                         .commit();
                 if (tab1 instanceof Tab1RoomList) {
-                    tab1 = new RoomInfo(listener);
+                    tab1 = new RoomInfo(listener1);
                 } else { // Instance of NextFragment
-                    tab1 = new Tab1RoomList(listener);
+                    tab1 = new Tab1RoomList(listener1);
+                }
+                notifyDataSetChanged();
+            }
+        }
+
+        private final class SecondPageListener implements SecondPageFragmentListener {
+            public void onSwitchToNextFragment() {
+                mFragmentManager.beginTransaction().remove(tab2)
+                        .commit();
+                if (tab2 instanceof Tab2MyRoom) {
+                    tab2 = new RoomInfo2(listener2);
+                } else { // Instance of NextFragment
+                    tab2 = new Tab2MyRoom(listener2);
                 }
                 notifyDataSetChanged();
             }
@@ -297,8 +322,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         private final FragmentManager mFragmentManager;
         public Fragment tab1;
+        public Fragment tab2;
         private Context context;
-        FirstPageListener listener = new FirstPageListener();
+        FirstPageListener listener1 = new FirstPageListener();
+        SecondPageListener listener2 = new SecondPageListener();
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -311,11 +338,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             switch (position) {
                 case 0:
                     if (tab1 == null) {
-                        tab1 = new Tab1RoomList(listener);
+                        tab1 = new Tab1RoomList(listener1);
                     }
                     return tab1;
                 case 1:
-                    Tab2MyRoom tab2 = new Tab2MyRoom();
+                    if (tab2 ==null){
+                        tab2 = new Tab2MyRoom(listener2);
+                    }
                     return tab2;
                 case 2:
                     Tab3Message tab3 = new Tab3Message();
@@ -350,6 +379,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return POSITION_NONE;
             }
             if (object instanceof RoomInfo && tab1 instanceof Tab1RoomList) {
+                return POSITION_NONE;
+            }
+            if (object instanceof Tab2MyRoom && tab2 instanceof RoomInfo2) {
+                return POSITION_NONE;
+            }
+            if (object instanceof RoomInfo2 && tab2 instanceof Tab2MyRoom) {
                 return POSITION_NONE;
             }
             return POSITION_UNCHANGED;
