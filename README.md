@@ -4,7 +4,21 @@
 
 ## 1. Client
 - Android (java, xml)
-
+#### Log in and sign in
+- At first, user has to login with his account. If user don't have an account, then he can make new account with new id, password, department in university, circle, and concerns
+- After login, app supports three functionality 
+#### TabA [List of Rooms]
+- User can see all of rooms which is save in DB now, and search rooms
+- The app also support fast search funtionality with department, and meal type
+- After searching room, user can send request to maker of the room
+- User can join the room only after maker accept the request 
+- Moreover, user can make new room with title, type of meal (No matter/Meal/Cafe/Drinking), maximum number of users
+#### TabB [My Room]
+- User can see all rooms which he or she is belong to
+- And if user select the room, then user can see the list of members and chat with people who are in the same room
+#### TabC [Messages]
+- User can see messages of request which he or she sent, and response of the request
+- If user get new request because someone wants to join his or her room, then the user can accept or reject the request, and the response go to opponent immediately
 
 ## 2. Server
 - Node.JS, mongoDB
