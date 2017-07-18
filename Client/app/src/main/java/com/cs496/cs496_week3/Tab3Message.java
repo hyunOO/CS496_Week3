@@ -55,6 +55,8 @@ public class Tab3Message extends Fragment {
         timer.schedule(timerTask, 0, 10);
         */
         LoadMessage();
+        adapter.sortArray();
+        adapter.notifyDataSetChanged();
 
         return view;
     }
@@ -72,6 +74,8 @@ public class Tab3Message extends Fragment {
                     @Override
                     public void run() {
                         LoadMessage();
+                        adapter.sortArray();
+                        adapter.notifyDataSetChanged();
                         swipeView.setRefreshing(false);
                     }
                 }, 1000);
@@ -97,11 +101,15 @@ public class Tab3Message extends Fragment {
                     boolean banjangRead = jsonArray.getJSONObject(i).getBoolean("bangjangRead");
                     boolean accept = jsonArray.getJSONObject(i).getBoolean("accept");
                     Message message = new Message(roomId, "Hello", requester, bangjang, banjangRead, accept);
+
+                    String messageId = jsonArray.getJSONObject(i).getString("_id");
+                    message.setMessageId(messageId);
                     adapter.add(message);
                 }
             }
         }
         catch (Exception e) {
+            Log.d("Hello", ""+e);
         }
 
         HttpUrl.Builder urlBuilder_new = HttpUrl.parse("http://13.124.143.15:10001/message/requester/" + Login.id).newBuilder();
@@ -118,11 +126,15 @@ public class Tab3Message extends Fragment {
                     boolean banjangRead = jsonArray.getJSONObject(i).getBoolean("bangjangRead");
                     boolean accept = jsonArray.getJSONObject(i).getBoolean("accept");
                     Message message = new Message(roomId, "Hello", requester, bangjang, banjangRead, accept);
+
+                    String messageId = jsonArray.getJSONObject(i).getString("_id");
+                    message.setMessageId(messageId);
                     adapter.add(message);
                 }
             }
         }
         catch (Exception e) {
+            Log.d("Hi", ""+e);
         }
 
     }

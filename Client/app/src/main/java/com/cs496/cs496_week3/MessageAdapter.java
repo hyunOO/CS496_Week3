@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -53,6 +54,7 @@ public class MessageAdapter extends BaseAdapter{
             // 방장이 자신이 만든 방에 가입하고 싶다고 요청을 보낸 메시지를 보여준다.
             if(message.getBanjangRead() == false && Login.id.equals(message.getBangjang()) && checkHide(message) == true){
                 convertView = inflater.inflate(R.layout.tab0_message_layout, parent, false);
+
                 String roomId = message.getRoomId();
                 HttpUrl.Builder urlBuilder_room = HttpUrl.parse("http://13.124.143.15:10001/room/roomId/"+roomId).newBuilder();
                 String url_room = urlBuilder_room.build().toString();
@@ -390,8 +392,22 @@ public class MessageAdapter extends BaseAdapter{
     }
 
     public void add(Message message){
-        messageList.add(0, message);
-        notifyDataSetChanged();
+        messageList.add(message);
+    }
+
+    public void sortArray(){
+        Collections.sort(messageList, new Comparator<Message>() {
+            @Override
+            public int compare(Message message, Message t1) {
+                if(Integer.parseInt(message.getMessageId().substring(0, 7), 16) < Integer.parseInt(t1.getMessageId().substring(0, 7), 16)){
+                    return 1;
+                }
+                else if(Integer.parseInt(message.getMessageId().substring(0, 7), 16) > Integer.parseInt(t1.getMessageId().substring(0, 7), 16)){
+                    return -1;
+                }
+                return 0;
+            }
+        });
     }
 
     public void remove(Message message){

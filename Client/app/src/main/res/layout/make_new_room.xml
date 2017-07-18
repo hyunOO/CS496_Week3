@@ -47,7 +47,7 @@
         <Button
             android:id="@+id/makeNewRoomConfirm"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:background="@color/colorBrighy"
             android:textColor="@color/colorAccent"
             android:text="방 만들기"/>
@@ -62,7 +62,7 @@
         <Button
             android:id="@+id/makeNewRoomCancel"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:background="@color/colorBrighy"
             android:textColor="@color/colorAccent"
             android:text="취소"/>
