@@ -21,7 +21,7 @@
             android:id="@+id/duplicate"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="#40e0d0"
+            android:background="@color/colorAccent"
             android:text="중복 확인" />
 
 
@@ -59,7 +59,7 @@
             android:id="@+id/press"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="#40e0d0"
+            android:background="@color/colorAccent"
             android:text="회원가입"/>
 
         <Button
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
-            android:background="#558A84"
+            android:background="@color/colorAccent"
             android:text="로그인 화면으로 돌아가기"/>
 
     </LinearLayout>

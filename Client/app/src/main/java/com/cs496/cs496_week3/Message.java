@@ -7,6 +7,7 @@ package com.cs496.cs496_week3;
 public class Message {
     private String title, requester, bangjang, roomId;
     private boolean bangjangRead, accept;
+    private boolean isNew = false;
 
     public void Message(){
 
@@ -39,6 +40,14 @@ public class Message {
 
     public void setAccept(Boolean accept) {
         this.accept = accept;
+    }
+
+    public void setIsNew(Boolean isNew) {
+        this.isNew = isNew;
+    }
+
+    public boolean getIsNew(){
+        return this.isNew;
     }
 
     public String getTitle() {

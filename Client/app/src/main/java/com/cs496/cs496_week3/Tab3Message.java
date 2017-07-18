@@ -40,7 +40,6 @@ public class Tab3Message extends Fragment {
     View view;
     Runnable mTimerTask;
     Handler mHandler;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab3_message, null);
         ListView listview = (ListView) view.findViewById(R.id.messageListView);
@@ -69,7 +68,6 @@ public class Tab3Message extends Fragment {
             @Override
             public void onRefresh() {
                 swipeView.setRefreshing(true);
-
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -82,9 +80,7 @@ public class Tab3Message extends Fragment {
     }
 
     public void LoadMessage(){
-
         adapter.clearAll();
-
         HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/message/bangjang/" + Login.id).newBuilder();
         String url = urlBuilder.build().toString();
         GetHandler handler = new GetHandler();
@@ -185,6 +181,10 @@ public class Tab3Message extends Fragment {
             } catch (Exception e) {
             }
             return null;
+        }
+
+        protected  void onPostExecute(String params){
+
         }
     }
 }

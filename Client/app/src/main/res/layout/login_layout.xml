@@ -72,22 +72,36 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <Button
-            android:id="@+id/login"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#40e0d0"
-            android:text="로그인" />
+            android:layout_height="wrap_content"
+            android:padding="3dp">
 
-        <TextView
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorBrighy"
+                android:textColor="@color/colorAccent"
+                android:text="로그인"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
-        <Button
-            android:id="@+id/sign"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#40e0d0"
-            android:text="회원가입" />
+            android:layout_height="wrap_content"
+            android:padding="3dp">
+
+            <Button
+                android:id="@+id/sign"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorBrighy"
+                android:textColor="@color/colorAccent"
+                android:text="회원가입" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

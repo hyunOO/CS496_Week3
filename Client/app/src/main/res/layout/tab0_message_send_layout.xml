@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="님의 방에 가입요청을 보내셨습니다." />
+            android:text="님에게 가입요청" />
 
     </LinearLayout>
 

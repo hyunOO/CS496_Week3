@@ -95,9 +95,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = navigationView.getHeaderView(0);
+        TextView real_id = header.findViewById(R.id.real_id_show);
+        real_id.setText(Login.id+"님 안녕하세요.");
+
         Menu menu = navigationView.getMenu();
-        MenuItem id_show = menu.findItem(R.id.id_show);
-        id_show.setTitle("아이디: " + Login.id);
         MenuItem department_show = menu.findItem(R.id.department_show);
         department_show.setTitle("학과: " + department);
         MenuItem circle_show = menu.findItem(R.id.circle_show);
@@ -197,8 +199,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         result = handler.execute(url_new).toString();
                         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                         Menu menu = navigationView.getMenu();
-                        MenuItem id_show = menu.findItem(R.id.id_show);
-                        id_show.setTitle("아이디: " + Login.id);
                         MenuItem department_show = menu.findItem(R.id.department_show);
                         department_show.setTitle("학과: " + department);
                         MenuItem circle_show = menu.findItem(R.id.circle_show);

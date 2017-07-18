@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="님에게 가입 거절을 보냈습니다." />
+            android:text="님의 요청 거절" />
 
     </LinearLayout>
 

@@ -4,9 +4,6 @@
     <item android:title="내 정보">
         <menu>
             <item
-                android:id="@+id/id_show"
-                android:title="개인정보 수정" />
-            <item
                 android:id="@+id/department_show"
                 android:title="로그아웃" />
             <item

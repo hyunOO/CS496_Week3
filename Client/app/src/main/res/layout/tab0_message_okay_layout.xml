@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="님에게 가입요청 수락을 했습니다." />
+            android:text="님의 요청 수락" />
 
     </LinearLayout>
 

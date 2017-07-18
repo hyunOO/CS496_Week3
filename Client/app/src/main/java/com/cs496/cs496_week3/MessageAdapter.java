@@ -1,7 +1,10 @@
 package com.cs496.cs496_week3;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
+import android.support.annotation.ColorRes;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
