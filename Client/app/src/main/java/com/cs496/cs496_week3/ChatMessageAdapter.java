@@ -1,0 +1,95 @@
+package com.cs496.cs496_week3;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.List;
+
+/**
+ * Created by rongrong on 2017-07-18.
+ */
+
+public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.ViewHolder> {
+
+    private List<ChatMessage> mMessages;
+    private int[] mUsernameColors;
+
+    public ChatMessageAdapter(Context context, List<ChatMessage> messages) {
+        mMessages = messages;
+        mUsernameColors = context.getResources().getIntArray(R.array.username_colors);
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layout = -1;
+        switch (viewType) {
+            case ChatMessage.TYPE_MESSAGE:
+                layout = R.layout.chat_item_chatmessage;
+                break;
+            case ChatMessage.TYPE_LOG:
+                layout = R.layout.chat_item_log;
+                break;
+            case ChatMessage.TYPE_ACTION:
+                layout = R.layout.chat_item_action;
+                break;
+        }
+        View v = LayoutInflater
+                .from(parent.getContext())
+                .inflate(layout, parent, false);
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        ChatMessage message = mMessages.get(position);
+        viewHolder.setMessage(message.getMessage());
+        viewHolder.setUsername(message.getUsername());
+    }
+
+    @Override
+    public int getItemCount() {
+        return mMessages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mMessages.get(position).getType();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView mUsernameView;
+        private TextView mMessageView;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            mUsernameView = (TextView) itemView.findViewById(R.id.username);
+            mMessageView = (TextView) itemView.findViewById(R.id.message);
+        }
+
+        public void setUsername(String username) {
+            if (null == mUsernameView) return;
+            mUsernameView.setText(username);
+            mUsernameView.setTextColor(getUsernameColor(username));
+        }
+
+        public void setMessage(String message) {
+            if (null == mMessageView) return;
+            mMessageView.setText(message);
+        }
+
+        private int getUsernameColor(String username) {
+            int hash = 7;
+            for (int i = 0, len = username.length(); i < len; i++) {
+                hash = username.codePointAt(i) + (hash << 5) - hash;
+            }
+            int index = Math.abs(hash % mUsernameColors.length);
+            return mUsernameColors[index];
+        }
+    }
+
+}

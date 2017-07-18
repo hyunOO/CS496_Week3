@@ -148,14 +148,14 @@ module.exports = function(app, Models)
 		console.log("request to /message/specific/"+req.params.roomId+"/"+req.params.requester+"/"+req.params.bangjangRead);
 		Models.Message.findOne({roomId: req.params.roomId, requester: req.params.requester, 
 			bangjangRead: req.params.bangjangRead}, function(err, message){
-			if(err) return res.status(500).send({error: err});
-			if(!message) {
-				console.log("   message not found");
-				return res.status(404).send({error: "message not found"});
-			}
-			res.json(message);
-			console.log("   successfully responsed");
-		})
+				if(err) return res.status(500).send({error: err});
+				if(!message) {
+					console.log("   message not found");
+					return res.status(404).send({error: "message not found"});
+				}
+				res.json(message);
+				console.log("   successfully responsed");
+			})
 	});
 
 	//새로운 user를 하나 만든다.
@@ -190,7 +190,7 @@ module.exports = function(app, Models)
 		room.maxUser = req.body.maxUser;
 		room.currentUser = 1;
 		room.userList = [req.body.makerId];
-	
+
 		room.save(function(err)	{
 			if(err){
 				console.error(err);

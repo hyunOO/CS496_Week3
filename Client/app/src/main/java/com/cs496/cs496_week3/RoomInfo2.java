@@ -1,5 +1,6 @@
 package com.cs496.cs496_week3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,18 @@ public class RoomInfo2 extends Fragment {
 
         Button enterChat = (Button) view.findViewById(R.id.sendRequest);
         enterChat.setText("채팅하기");
+        enterChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ChatMainActivity.class);
+//                intent.putExtra("id", id);
+//                intent.putExtra("department", department);
+//                intent.putExtra("circle", circle);
+//                intent.putExtra("hobby", hobby);
+//                intent.putExtra("tag", tag);
+                startActivity(intent);
+            }
+        });
 
         Button btnReturn = (Button) view.findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(new View.OnClickListener() {
