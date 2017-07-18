@@ -61,18 +61,22 @@ public class RoomInfo extends Fragment {
             case "BANGJANG":
                 sendRequest.setText("이 방의 방장입니다");
                 sendRequest.setEnabled(false);
+                sendRequest.setBackgroundColor(getResources().getColor(R.color.nonClickable));
                 break;
             case "MEMBER":
                 sendRequest.setText("이미 가입된 방입니다");
                 sendRequest.setEnabled(false);
+                sendRequest.setBackgroundColor(getResources().getColor(R.color.nonClickable));
                 break;
             case "REJECT":
                 sendRequest.setText("가입이 거부되었습니다");
                 sendRequest.setEnabled(false);
+                sendRequest.setBackgroundColor(getResources().getColor(R.color.nonClickable));
                 break;
             case "WAITING":
                 sendRequest.setText("승인 대기중");
                 sendRequest.setEnabled(false);
+                sendRequest.setBackgroundColor(getResources().getColor(R.color.nonClickable));
                 break;
             case "NOTHING":
                 sendRequest.setOnClickListener(new View.OnClickListener() {

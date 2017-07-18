@@ -97,15 +97,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View header = navigationView.getHeaderView(0);
         TextView real_id = header.findViewById(R.id.real_id_show);
-        real_id.setText(Login.id+"님 안녕하세요.");
+        real_id.setText(Login.id);
 
         Menu menu = navigationView.getMenu();
         MenuItem department_show = menu.findItem(R.id.department_show);
-        department_show.setTitle("학과: " + department);
+        department_show.setTitle("학과 :  " + department);
         MenuItem circle_show = menu.findItem(R.id.circle_show);
-        circle_show.setTitle("동아리: " + circle);
+        circle_show.setTitle("동아리/취미 :  " + circle);
         MenuItem hobby_show = menu.findItem(R.id.hobby_show);
-        hobby_show.setTitle("취미: " + hobby);
+        hobby_show.setTitle("기타 :  " + hobby);
 
     }
 
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
 
 
-            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            alert.setPositiveButton("수정", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -200,11 +200,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                         Menu menu = navigationView.getMenu();
                         MenuItem department_show = menu.findItem(R.id.department_show);
-                        department_show.setTitle("학과: " + department);
+                        department_show.setTitle("학과 :  " + department);
                         MenuItem circle_show = menu.findItem(R.id.circle_show);
-                        circle_show.setTitle("동아리: " + circle);
+                        circle_show.setTitle("동아리/취미 :  " + circle);
                         MenuItem hobby_show = menu.findItem(R.id.hobby_show);
-                        hobby_show.setTitle("취미: " + hobby);
+                        hobby_show.setTitle("기타 :  " + hobby);
                     } catch (Exception e) {
 
                     }

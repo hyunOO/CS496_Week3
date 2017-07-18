@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#D45559</color>
     <color name="colorAccent">#454254</color>
     <color name="colorBrighy">#EFEFEA</color>
+    <color name="nonClickable">#BDBDB9</color>
 
     <color name="username0">#e21400</color>
     <color name="username1">#91580f</color>

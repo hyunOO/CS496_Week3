@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="10dp">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,32 +12,32 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingRight="5dp"
-            android:text="아이디:" />
+            android:text="아이디 :  " />
 
         <TextView
             android:id="@+id/userId"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="rongrong" />
 
         <TextView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="학과:" />
+            android:text="학과 :  " />
 
         <TextView
             android:id="@+id/userDepartment"
-            android:layout_width="0dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent"
-            android:layout_weight="5.14"
             android:gravity="center_vertical"
-            android:text="SoC" />
+            android:text="전산학부" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,33 +47,40 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingRight="5dp"
-            android:text="동아리:" />
+            android:text="동아리/취미 :  " />
 
         <TextView
             android:id="@+id/userCircle"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="Kaldi" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingRight="5dp"
-            android:text="취미:" />
+            android:text="기타 :  " />
 
         <TextView
             android:id="@+id/userHobby"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
             android:gravity="center_vertical"
-            android:text="Coffe" />
+            android:text="Coffee" />
+
     </LinearLayout>
 
 </LinearLayout>
