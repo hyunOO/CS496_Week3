@@ -6,8 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -30,7 +29,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -85,7 +84,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="참여자 목록"/>
+            android:text="참여자 목록"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"/>
 
     </LinearLayout>
 
@@ -108,19 +109,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/sendRequest"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="가입요청" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp">
 
-        <Button
-            android:id="@+id/btnReturn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="목록보기" />
+            <Button
+                android:id="@+id/sendRequest"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorBrighy"
+                android:textColor="@color/colorAccent"
+                android:text="가입요청"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp">
+
+            <Button
+                android:id="@+id/btnReturn"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorBrighy"
+                android:textColor="@color/colorAccent"
+                android:text="목록보기"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
