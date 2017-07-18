@@ -86,9 +86,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="참여자 목록"
             android:gravity="center"
-            android:textColor="@color/colorAccent"/>
+            android:text="참여자 목록"
+            android:textColor="@color/colorAccent" />
 
     </LinearLayout>
 
@@ -123,8 +123,8 @@
                 android:layout_height="45dp"
                 android:layout_weight="1"
                 android:background="@color/colorBrighy"
-                android:textColor="@color/colorAccent"
-                android:text="가입요청"/>
+                android:text="가입요청"
+                android:textColor="@color/colorAccent" />
 
             <TextView
                 android:layout_width="7dp"

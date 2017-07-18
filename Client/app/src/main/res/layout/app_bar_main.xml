@@ -29,7 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"/>
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabTextColor="#918AB0"
+            app:tabSelectedTextColor="@color/colorAccent" />
 
     </android.support.design.widget.AppBarLayout>
 

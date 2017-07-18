@@ -20,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,7 +29,7 @@ import okhttp3.Response;
  * Created by rongrong on 2017-07-14.
  */
 
-public class Tab2MyRoom extends Fragment{
+public class Tab2MyRoom extends Fragment {
     static RoomListAdapter adapter = new RoomListAdapter();
     View view;
     static SecondPageFragmentListener secondPageListener;
@@ -168,7 +167,7 @@ public class Tab2MyRoom extends Fragment{
                 e.printStackTrace();
             }
 
-            if (userList.contains("\""+Login.id+"\"")) {
+            if (userList.contains("\"" + Login.id + "\"")) {
                 Room newroom = new Room();
                 try {
                     newroom.setTitle(room.getString("title"));

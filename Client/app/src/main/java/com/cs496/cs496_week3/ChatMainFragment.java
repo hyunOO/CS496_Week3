@@ -2,7 +2,6 @@ package com.cs496.cs496_week3;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -69,7 +68,7 @@ public class ChatMainFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mAdapter = new ChatMessageAdapter(context, mMessages);
-        if (context instanceof Activity){
+        if (context instanceof Activity) {
             //this.listener = (MainActivity) context;
         }
     }
@@ -83,8 +82,8 @@ public class ChatMainFragment extends Fragment {
 
         ChatApplication app = (ChatApplication) getActivity().getApplication();
         mSocket = app.getSocket();
-        mSocket.on(Socket.EVENT_CONNECT,onConnect);
-        mSocket.on(Socket.EVENT_DISCONNECT,onDisconnect);
+        mSocket.on(Socket.EVENT_CONNECT, onConnect);
+        mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
         mSocket.on("new message", onNewMessage);
@@ -264,7 +263,6 @@ public class ChatMainFragment extends Fragment {
     private Emitter.Listener onConnect = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            Log.e("in onConnect", "in onConnect");
             final JSONObject data = new JSONObject();
             try {
                 data.put("username", mUsername);
@@ -280,17 +278,11 @@ public class ChatMainFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(isConnected) {
-                        Log.e("isConnected", "isConnected");
-                        if(null!=mUsername) {
+                    if (isConnected) {
+                        if (null != mUsername) {
                             mSocket.emit("add user", data);
 //                            mSocket.emit("add user", mUsername, ChatMainActivity.roomId);
-                            Log.e("emit add user", "emit add user");
-                            Log.e("data", data.toString());
                         }
-                        Log.e("ndn", "asdfasfasf");
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                R.string.connect, Toast.LENGTH_LONG).show();
                         isConnected = true;
                     }
 
@@ -329,7 +321,6 @@ public class ChatMainFragment extends Fragment {
     private Emitter.Listener onLogin = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            Log.e("into onLogin", "into onLogin");
             JSONObject data = (JSONObject) args[0];
 
             final int numUsers;

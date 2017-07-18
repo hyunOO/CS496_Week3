@@ -89,11 +89,11 @@ public class RoomListAdapter extends BaseAdapter {
         displayList.clear();
         if (search_text.length() == 0) {
             displayList.addAll(roomList);
-        }else{
-            for (Room room : roomList){
+        } else {
+            for (Room room : roomList) {
                 if (room.getTitle().contains(search_text)
                         || (room.getMealType().contains(search_text))
-                        || (room.getMakerId().contains(search_text))){
+                        || (room.getMakerId().contains(search_text))) {
                     displayList.add(room);
                 }
             }

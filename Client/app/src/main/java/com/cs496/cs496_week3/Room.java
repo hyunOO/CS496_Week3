@@ -1,7 +1,5 @@
 package com.cs496.cs496_week3;
 
-import java.util.ArrayList;
-
 /**
  * Created by rongrong on 2017-07-14.
  */
@@ -34,11 +32,11 @@ public class Room {
         this.current = String.valueOf(currentUser) + "/" + String.valueOf(maxUser);
     }
 
-    public  void  setRoomId(String roomId){
+    public void setRoomId(String roomId) {
         this.roomId = roomId;
     }
 
-    public void setClosed(Boolean closed){
+    public void setClosed(Boolean closed) {
         this.closed = closed;
     }
 
@@ -62,7 +60,7 @@ public class Room {
         return this.roomId;
     }
 
-    public Boolean getClosed(){
+    public Boolean getClosed() {
         return closed;
     }
 }

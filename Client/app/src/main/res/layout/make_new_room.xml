@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-              android:text="방 유형"
+        android:text="방 유형"
         android:textColor="#000000"
         android:textSize="18dp" />
 

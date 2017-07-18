@@ -1,28 +1,19 @@
 package com.cs496.cs496_week3;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -40,6 +31,7 @@ public class Tab3Message extends Fragment {
     View view;
     Runnable mTimerTask;
     Handler mHandler;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab3_message, null);
         ListView listview = (ListView) view.findViewById(R.id.messageListView);
@@ -83,7 +75,7 @@ public class Tab3Message extends Fragment {
         });
     }
 
-    public void LoadMessage(){
+    public void LoadMessage() {
         adapter.clearAll();
         HttpUrl.Builder urlBuilder = HttpUrl.parse("http://13.124.143.15:10001/message/bangjang/" + Login.id).newBuilder();
         String url = urlBuilder.build().toString();
@@ -91,10 +83,9 @@ public class Tab3Message extends Fragment {
         try {
             String res = handler.execute(url).get();
             JSONArray jsonArray = new JSONArray(res);
-            if(res == null){
-            }
-            else{
-                for(int i = 0; i < jsonArray.length(); i++){
+            if (res == null) {
+            } else {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     String roomId = jsonArray.getJSONObject(i).getString("roomId");
                     String requester = jsonArray.getJSONObject(i).getString("requester");
                     String bangjang = jsonArray.getJSONObject(i).getString("bangjang");
@@ -107,9 +98,8 @@ public class Tab3Message extends Fragment {
                     adapter.add(message);
                 }
             }
-        }
-        catch (Exception e) {
-            Log.d("Hello", ""+e);
+        } catch (Exception e) {
+            Log.e("Exception", e.toString());
         }
 
         HttpUrl.Builder urlBuilder_new = HttpUrl.parse("http://13.124.143.15:10001/message/requester/" + Login.id).newBuilder();
@@ -118,8 +108,8 @@ public class Tab3Message extends Fragment {
         try {
             String res = handler_new.execute(url_new).get();
             JSONArray jsonArray = new JSONArray(res);
-            if(res != null){
-                for(int i = 0; i < jsonArray.length(); i++){
+            if (res != null) {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     String roomId = jsonArray.getJSONObject(i).getString("roomId");
                     String requester = jsonArray.getJSONObject(i).getString("requester");
                     String bangjang = jsonArray.getJSONObject(i).getString("bangjang");
@@ -132,9 +122,8 @@ public class Tab3Message extends Fragment {
                     adapter.add(message);
                 }
             }
-        }
-        catch (Exception e) {
-            Log.d("Hi", ""+e);
+        } catch (Exception e) {
+            Log.e("Exception", e.toString());
         }
 
     }
@@ -195,7 +184,7 @@ public class Tab3Message extends Fragment {
             return null;
         }
 
-        protected  void onPostExecute(String params){
+        protected void onPostExecute(String params) {
 
         }
     }

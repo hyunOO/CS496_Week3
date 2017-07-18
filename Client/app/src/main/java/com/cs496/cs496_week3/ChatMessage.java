@@ -14,19 +14,26 @@ public class ChatMessage {
     private String mMessage;
     private String mUsername;
 
-    private ChatMessage() {}
+    private ChatMessage() {
+    }
 
     public int getType() {
         return mType;
-    };
+    }
+
+    ;
 
     public String getMessage() {
         return mMessage;
-    };
+    }
+
+    ;
 
     public String getUsername() {
         return mUsername;
-    };
+    }
+
+    ;
 
 
     public static class Builder {

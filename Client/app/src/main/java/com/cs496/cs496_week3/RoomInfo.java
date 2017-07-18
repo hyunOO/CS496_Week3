@@ -135,6 +135,7 @@ public class RoomInfo extends Fragment {
                             Toast.makeText(getContext(), "가입요청을 보냈습니다", Toast.LENGTH_SHORT).show();
                             sendRequest.setText("승인 대기중");
                             sendRequest.setEnabled(false);
+                            sendRequest.setBackgroundColor(getResources().getColor(R.color.nonClickable));
                         } else {
                             Toast.makeText(getContext(), "가입요청을 보내는데 실패하였습니다", Toast.LENGTH_SHORT).show();
                         }

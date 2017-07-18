@@ -1,10 +1,11 @@
 package com.cs496.cs496_week3;
 
 import android.app.Application;
-import io.socket.client.IO;
-import io.socket.client.Socket;
 
 import java.net.URISyntaxException;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
 
 /**
  * Created by rongrong on 2017-07-18.
@@ -12,6 +13,7 @@ import java.net.URISyntaxException;
 
 public class ChatApplication extends Application {
     private Socket mSocket;
+
     {
         try {
             mSocket = IO.socket(ChatConstants.CHAT_SERVER_URL);

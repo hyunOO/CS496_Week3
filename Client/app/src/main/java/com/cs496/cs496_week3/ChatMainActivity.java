@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by rongrong on 2017-07-18.
  */
 
-public class ChatMainActivity extends AppCompatActivity{
+public class ChatMainActivity extends AppCompatActivity {
 
     static String roomId;
 

@@ -1,28 +1,36 @@
 # [CS496_Week3]
-## Project Name: 
+## Project Name: 아싸탈출 (no more outsider)
 ### Team: [HyunWoo Kang](https://github.com/hyunOO), [SeungMin Lee](https://github.com/iamlsm97)
 
 ## 1. Client
 - Android (java, xml)
-#### Log in and sign in
-- At first, user has to login with his account. If user don't have an account, then he can make new account with new id, password, department in university, circle, and concerns
-- After login, app supports three functionality 
+
+#### Log in and sign up
+- At first, user has to login with his account.
+- If user doesn't have an account, then he can sign up with new id, password, department in university, circles or hobbies, and concerns
+- User can edit his account infromation later
+- After login, app supports three functionalities
+
 #### TabA [List of Rooms]
-- User can see all of rooms which is save in DB now, and search rooms
-- The app also support fast search funtionality with department, and meal type
-- After searching room, user can send request to maker of the room
-- User can join the room only after maker accept the request 
-- Moreover, user can make new room with title, type of meal (No matter/Meal/Cafe/Drinking), maximum number of users
+- User can see all of opened rooms which is saved in DB now, and can search rooms with a keyword
+- The app also supports fast search funtionality by department, and meal type
+- After selecting a room, user can send a request toward the maker to join the room
+- User can join the room only after the maker accepts the request 
+- Moreover, user can make a new room with title, type of meal (No matter/Meal/Cafe/Drinking), maximum number of users
+
 #### TabB [My Room]
-- User can see all rooms which he or she is belong to
-- And if user select the room, then user can see the list of members and chat with people who are in the same room
+- User can see the list of rooms that he or she belongs to, and can search rooms with a keyword
+- And if user selects a room, user can see the list of members in the same room
+- Finally, user can chat with room members in real time
+
 #### TabC [Messages]
-- User can see messages of request which he or she sent, and response of the request
-- If user get new request because someone wants to join his or her room, then the user can accept or reject the request, and the response go to opponent immediately
+- User can see the list of request messages which he or she sent, and responsed to received request
+- If user receives a new request because someone wants to join in his or her room, user can accept or reject the request, and the response goes to the requester
+
 
 ## 2. Server
 - Node.JS, mongoDB
-- Code dependencies: express, boody-parser, mongoose
+- Code dependencies: express, socket.io, boody-parser, mongoose
 - Server host: 13.124.143.15
 
 Install dependencies:
@@ -49,6 +57,7 @@ $ node app.js
     - Make a new user with request body which is consist of id, department, circle, hobby
 - POST /user/:userId
     - Update user information whose attribute 'id' is same as request parameter's id
+
 - GET /room
     - Show all rooms in DB
 - GET /room/title/:title
@@ -69,6 +78,7 @@ $ node app.js
     - Add a new user in 'userList' of a room which attribute 'roomId' is same as request parameter's roomId
 - PUT /room/:roomId
     - Update room information which attribute 'roomId' is same as request parameter's roomId
+
 - GET /message
     - Show all messages in DB
 - GET /message/bangjang/:bangjang
@@ -88,5 +98,7 @@ $ node app.js
 - routes/
     - index.js : routing Server code
 - views/ 
-- app.js: main JavaScript Server code
+    - index.html : check whether server is alive
+    - list.html : show list of availabe API requests
+- app.js: main JavaScript Server code with socket.io Chat code
 - package.json : include code dependencies

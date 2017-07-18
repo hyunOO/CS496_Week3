@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -79,9 +78,9 @@ public class UserListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public Boolean checkUser(String userId){
-        for (int i=0; i< userList.size(); i++){
-            if (userId.equals(userList.get(i).getId())){
+    public Boolean checkUser(String userId) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userId.equals(userList.get(i).getId())) {
                 return true;
             }
         }

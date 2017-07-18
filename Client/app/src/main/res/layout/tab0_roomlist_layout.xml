@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:orientation="vertical"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="제목: "
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/title"
@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center_vertical"
-            android:text="전산과 모여라~"/>
+            android:text="전산과 모여라~" />
 
     </LinearLayout>
 
@@ -41,7 +41,7 @@
             android:layout_weight="2"
             android:gravity="center_vertical"
             android:text="유형: "
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/mealType"
@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center_vertical"
-            android:text="상관없음"/>
+            android:text="상관없음" />
 
         <TextView
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="방장: "
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/makerId"
@@ -74,7 +74,7 @@
             android:layout_weight="2"
             android:gravity="center_vertical"
             android:text="3/4"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
     </LinearLayout>
 
@@ -82,6 +82,6 @@
         android:id="@+id/roomId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

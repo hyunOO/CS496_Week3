@@ -16,31 +16,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/departmentSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="7dp"
-                    android:text="학과로 검색"
-                    android:background="@color/colorBrighy"
-                    android:textColor="@color/colorAccent"
-                    android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/departmentSearch"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:background="@color/colorBrighy"
+                android:text="학과로 검색"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent" />
 
-                <TextView
-                    android:layout_width="7dp"
-                    android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="7dp"
+                android:layout_height="match_parent" />
 
-                <Button
-                    android:id="@+id/mealTypeSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="7dp"
-                    android:text="유형으로 검색"
-                    android:background="@color/colorBrighy"
-                    android:textColor="@color/colorAccent"
-                    android:textAllCaps="false" />
+            <Button
+                android:id="@+id/mealTypeSearch"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="7dp"
+                android:layout_weight="1"
+                android:background="@color/colorBrighy"
+                android:text="유형으로 검색"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent" />
 
         </LinearLayout>
 
@@ -61,7 +61,7 @@
             <ListView
                 android:id="@+id/roomlistListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -73,10 +73,10 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="42dp"
-        app:srcCompat="@android:drawable/ic_input_add"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:scaleType="center"
         android:tint="@android:color/white"
-        android:scaleType="center"/>
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </RelativeLayout>

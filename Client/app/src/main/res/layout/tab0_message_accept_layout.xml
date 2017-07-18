@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
 
     <LinearLayout
-        android:layout_width="320dp"
-        android:layout_marginRight="0dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <HorizontalScrollView
@@ -54,7 +56,6 @@
         android:id="@+id/imageView3"
         android:layout_width="30dp"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
         android:src="@drawable/ic_sentiment_satisfied_black_24dp" />
 
 
