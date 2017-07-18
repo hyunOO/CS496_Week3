@@ -95,7 +95,7 @@ public class ChatMainFragment extends Fragment {
         mSocket.on("login", onLogin);
         mSocket.connect();
 
-        mSocket.emit("add user", Login.id);
+//        mSocket.emit("add user", Login.id);
 
     }
 
@@ -264,12 +264,31 @@ public class ChatMainFragment extends Fragment {
     private Emitter.Listener onConnect = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            Log.e("in onConnect", "in onConnect");
+            final JSONObject data = new JSONObject();
+            try {
+                data.put("username", mUsername);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                data.put("roomId", ChatMainActivity.roomId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(!isConnected) {
-                        if(null!=mUsername)
-                            mSocket.emit("add user", mUsername);
+                    if(isConnected) {
+                        Log.e("isConnected", "isConnected");
+                        if(null!=mUsername) {
+                            mSocket.emit("add user", data);
+//                            mSocket.emit("add user", mUsername, ChatMainActivity.roomId);
+                            Log.e("emit add user", "emit add user");
+                            Log.e("data", data.toString());
+                        }
+                        Log.e("ndn", "asdfasfasf");
                         Toast.makeText(getActivity().getApplicationContext(),
                                 R.string.connect, Toast.LENGTH_LONG).show();
                         isConnected = true;
@@ -310,6 +329,7 @@ public class ChatMainFragment extends Fragment {
     private Emitter.Listener onLogin = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            Log.e("into onLogin", "into onLogin");
             JSONObject data = (JSONObject) args[0];
 
             final int numUsers;

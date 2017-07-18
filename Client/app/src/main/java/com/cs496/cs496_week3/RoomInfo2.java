@@ -60,6 +60,7 @@ public class RoomInfo2 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ChatMainActivity.class);
+                intent.putExtra("roomId", roomId);
 //                intent.putExtra("id", id);
 //                intent.putExtra("department", department);
 //                intent.putExtra("circle", circle);

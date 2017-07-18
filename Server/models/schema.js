@@ -33,6 +33,6 @@ var messageSchema = new Schema({
 module.exports = {
 	User: mongoose.model('user', userSchema),
 	Room: mongoose.model('room', roomSchema),
-	Message: mongoose.model('message', messageSchema),
+	Message: mongoose.model('message', messageSchema)
 }
 

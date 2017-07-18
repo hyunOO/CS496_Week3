@@ -50,33 +50,38 @@ io.on('connection', function (socket) {
 
 	console.log("-----socket connected");
 
+  var roomId;
 	var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
     console.log("-----socket got a new message");
-    socket.broadcast.emit('new message', {
+    socket.to(roomId).emit('new message', {
     	username: socket.username,
     	message: data
     });
   });
 
   // when the client emits 'add user', this listens and executes
-  socket.on('add user', function (username) {
+  socket.on('add user', function (data) {
   	console.log("-----socket add user");
+    console.log(data);
 
   	if (addedUser) return;
 
+    roomId = data.roomId;
+
     // we store the username in the socket session for this client
-    socket.username = username;
+    socket.username = data.username;
     ++numUsers;
     addedUser = true;
+    socket.join(roomId);
     socket.emit('login', {
     	numUsers: numUsers
     });
     // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
+    socket.broadcast.to(roomId).emit('user joined', {
     	username: socket.username,
     	numUsers: numUsers
     });
@@ -85,7 +90,7 @@ io.on('connection', function (socket) {
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
   	console.log("-----socket typing");
-  	socket.broadcast.emit('typing', {
+  	socket.to(roomId).emit('typing', {
   		username: socket.username
   	});
   });
@@ -93,7 +98,7 @@ io.on('connection', function (socket) {
   // when the client emits 'stop typing', we broadcast it to others
   socket.on('stop typing', function () {
   	console.log("-----socket stop typing");
-  	socket.broadcast.emit('stop typing', {
+  	socket.to(roomId).emit('stop typing', {
   		username: socket.username
   	});
   });
@@ -105,10 +110,13 @@ io.on('connection', function (socket) {
   		--numUsers;
 
       // echo globally that this client has left
-      socket.broadcast.emit('user left', {
+      socket.to(roomId).emit('user left', {
       	username: socket.username,
       	numUsers: numUsers
       });
     }
+
+    socket.leave(roomId);
+
   });
 });
