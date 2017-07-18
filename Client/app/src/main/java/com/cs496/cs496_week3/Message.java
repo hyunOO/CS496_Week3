@@ -8,6 +8,7 @@ public class Message {
     private String title, requester, bangjang, roomId;
     private boolean bangjangRead, accept;
     private boolean isNew = false;
+    private String messageId;
 
     public void Message(){
 
@@ -44,6 +45,14 @@ public class Message {
 
     public void setIsNew(Boolean isNew) {
         this.isNew = isNew;
+    }
+
+    public void setMessageId(String messageId){
+        this.messageId = messageId;
+    }
+
+    public String getMessageId(){
+        return this.messageId;
     }
 
     public boolean getIsNew(){

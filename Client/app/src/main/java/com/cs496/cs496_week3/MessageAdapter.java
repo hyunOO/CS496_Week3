@@ -49,7 +49,6 @@ public class MessageAdapter extends BaseAdapter{
         final Context context = parent.getContext();
         final Message message = messageList.get(position);
 
-        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // 방장이 자신이 만든 방에 가입하고 싶다고 요청을 보낸 메시지를 보여준다.
             if(message.getBanjangRead() == false && Login.id.equals(message.getBangjang()) && checkHide(message) == true){
@@ -255,7 +254,6 @@ public class MessageAdapter extends BaseAdapter{
                 TextView txt = convertView.findViewById(R.id.message_from);
                 txt.setText(message.getRequester());
             }
-        }
 
         /*
         if(message != null){
@@ -392,7 +390,7 @@ public class MessageAdapter extends BaseAdapter{
     }
 
     public void add(Message message){
-        messageList.add(message);
+        messageList.add(0, message);
         notifyDataSetChanged();
     }
 
