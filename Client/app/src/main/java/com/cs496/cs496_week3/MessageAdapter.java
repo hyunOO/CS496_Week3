@@ -6,13 +6,16 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.support.annotation.ColorRes;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +58,14 @@ public class MessageAdapter extends BaseAdapter{
             if(message.getBanjangRead() == false && Login.id.equals(message.getBangjang()) && checkHide(message) == true){
                 convertView = inflater.inflate(R.layout.tab0_message_layout, parent, false);
 
+                final TextView checkNumber = convertView.findViewById(R.id.checkNumber);
+                checkNumber.setText("0");
+                final LinearLayout linearLayout1 = convertView.findViewById(R.id.whole_layout);
+                final LinearLayout linearLayout_whole = convertView.findViewById(R.id.real_whole_layout);
+
+                //linearLayout_whole.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 60));
+                linearLayout1.setVisibility(View.GONE);
+
                 String roomId = message.getRoomId();
                 HttpUrl.Builder urlBuilder_room = HttpUrl.parse("http://13.124.143.15:10001/room/roomId/"+roomId).newBuilder();
                 String url_room = urlBuilder_room.build().toString();
@@ -73,8 +84,47 @@ public class MessageAdapter extends BaseAdapter{
                 TextView txt = convertView.findViewById(R.id.message_from);
                 txt.setText(message.getRequester());
 
+                HttpUrl.Builder urlBuilder_requester = HttpUrl.parse("http://13.124.143.15:10001/user/id/"+message.getRequester()).newBuilder();
+                String url_requester = urlBuilder_requester.build().toString();
+                GetHandler handler_requester = new GetHandler();
+                String res_requester = null;
+                try{
+                    res_requester = handler_requester.execute(url_requester).get();
+                    JSONObject requester_res = new JSONObject(res_requester);
+                    String dep_req = requester_res.getString("department");
+                    String circle_req = requester_res.getString("circle");
+                    String hobby_req = requester_res.getString("hobby");
+                    TextView req_dep = convertView.findViewById(R.id.userDepartment);
+                    req_dep.setText(dep_req);
+                    TextView req_circle = convertView.findViewById(R.id.userCircle);
+                    req_circle.setText(circle_req);
+                    TextView req_hobby = convertView.findViewById(R.id.userHobby);
+                    req_hobby.setText(hobby_req);
+                }
+                catch(Exception e){
+                    Log.d("Hello", ""+e);
+                }
+
                 final ImageButton btn_accept = convertView.findViewById(R.id.accept);
                 final ImageButton btn_reject = convertView.findViewById(R.id.reject);
+                final ImageButton btn_look = convertView.findViewById(R.id.userInfo);
+
+
+                btn_look.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(checkNumber.getText().equals("0")){
+                            linearLayout1.setVisibility(View.VISIBLE);
+                            //linearLayout_whole.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 150));
+                            checkNumber.setText("1");
+                        }
+                        else{
+                            linearLayout1.setVisibility(View.GONE);
+                            //linearLayout_whole.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 60));
+                            checkNumber.setText("0");
+                        }
+                    }
+                }));
 
                 btn_accept.setOnClickListener((new View.OnClickListener() {
                     @Override
@@ -93,6 +143,7 @@ public class MessageAdapter extends BaseAdapter{
                                 add_res = addUserHanler.execute(url_hello).get();
                                 btn_reject.setVisibility(View.GONE);
                                 btn_accept.setVisibility(View.GONE);
+                                btn_look.setVisibility(View.GONE);
                             }
                             catch (Exception e){
 
@@ -117,6 +168,7 @@ public class MessageAdapter extends BaseAdapter{
                             Log.d("Hello", "Hi");
                             btn_reject.setVisibility(View.GONE);
                             btn_accept.setVisibility(View.GONE);
+                            btn_look.setVisibility(View.GONE);
                         }
                         catch(Exception e){
 
@@ -276,6 +328,7 @@ public class MessageAdapter extends BaseAdapter{
         */
         return convertView;
     }
+
 
     public boolean checkHide (Message message){
         HttpUrl.Builder urlBuilder_new = HttpUrl.parse("http://13.124.143.15:10001/message/specific/" + message.getRoomId()+"/"+message.getRequester()+"/"+true).newBuilder();
